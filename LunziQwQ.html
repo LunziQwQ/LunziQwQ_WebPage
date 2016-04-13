@@ -58,6 +58,30 @@
 		</div>
 	</div>
 	
+	<div id="TodoListArea">
+		<div id="TodoList">
+			<h3>TodoList</h3>
+			<ol id="list_TD">
+
+			</ol>
+			<div id = "EditArea_TDL">
+				<br>
+				<div style="border: solid 1px lightgray;">
+					<p>
+						<input id="AddInput_TDL" type="text" name="text" onfocus="inputFlag = this;">
+					</p>
+					<p>
+						<button onclick="onAddClick()">Add</button>
+						<button onclick="onClearClick()">Clear</button>
+						<button onclick="onFinishClick()">Finish</button>
+						<select id="FinishTDL"></select>
+					</p>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
 	<footer id ='footerMenu'>
 		<div id="footerMenu01" class="footerMenuChild">
 			
