@@ -195,7 +195,6 @@ function InputError(input) {
     setTimeout(function(){
         input.className = '';
     }, 500);
-
 }
 
 addEventListener("keyup", function (event) {
