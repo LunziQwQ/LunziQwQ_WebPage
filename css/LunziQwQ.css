@@ -2,17 +2,14 @@ body {
 	font-family: "microsoft yahei";
 	height: 100%;
 }
-
 h1{
 	font-size:50px;
 	font-style: inherit;
 }
-
 h2{
 	font-size:40px;
 	font-style: inherit
 }
-
 h3{
 	font-size:60px;
 	color: #55C3B5;
@@ -27,7 +24,6 @@ h4{
 	font-family: "微软雅黑";
 	text-shadow: 0px 1px 1px black;
 }
-
 ol{
 	margin-left:40px ;
 }
@@ -36,26 +32,11 @@ li{
 	font-family: "microsoft yahei";
 	font-size: 20px;
 }
-
 p{
 	margin: 10px;
 }
 
-
-#Level {
-	position: absolute;
-	padding: 0 10px 0 10px;
-	left: 10px;
-}
-	
-#MyInfo {
-	position: absolute;
-	left: 140px;
-	top: 120px;
-	background: white;
-	transform: scale(0);
-}
-
+/*　　整个页面的纹理背景　　*******************************************/
 #background{
 	background: url(../img/QQ图片20160412204030.png)	;
 	position: absolute;
@@ -64,6 +45,54 @@ p{
 	z-index: -10;
 }
 
+
+/*　　左上角Level部分　　*******************************************/
+#Level {
+	position: absolute;
+	padding: 0 10px 0 10px;
+	left: 10px;
+}
+
+
+/*　　点击level后弹出的MyInfo页面部分　　******************************/
+#MyInfo {
+	position: absolute;
+	left: 140px;
+	top: 120px;
+	background: white;
+	transform: scale(0);
+}
+#InfoBackground {		/*头像图片*/
+	position: relative;
+	top: -8px;
+	background: url(../img/Icon.jpg);
+	background-size: 100%;
+	width: 300px;
+	height: 300px;
+}
+#InfoUnderImg{		/*头像图片下面文字区域*/
+	padding: 15px;
+	font-size: 20px;
+}
+.MyInfo-onImg {		/*头像图片上层文字部分*/
+	position: relative;
+	top: 220px;
+	left: 10px;
+}
+.MyInfo-onImg-name {	/*上层名字*/
+	font-size: 40px;
+	font-style: initial;
+	color: white;
+}
+.MyInfo-onImg-motto {	/*上层个性签名*/
+	color: lightgray;
+	font-size: 15px;
+}
+
+
+/*　　动画效果，关键帧与对应类　　**************************************/
+
+/****　　大小缩放　　****/
 .showTheBlock{
 	animation: showBlock 0.3s;
 }
@@ -79,40 +108,36 @@ p{
 	100%{transform: scale(0);}
 }
 
-#InfoBackground {
-	position: relative;
-	top: -8px;
-	background: url(../img/Icon.jpg);
-	background-size: 100%;
-	width: 300px;
-	height: 300px;
+/****　　淡入淡出　　****/
+.showMore{
+	animation: fadeIn 0.3s;
+}
+.hideMore{
+	animation: fadeOut 0.3s;
+}
+@keyframes fadeIn{
+	0%{opacity:0;}
+	100%{opacity:1;}
+}
+@keyframes fadeOut{
+	0%{opacity: 1;}
+	100%{opacity:0;}
 }
 
-#InfoUnderImg{
-	padding: 15px;
-	font-size: 20px;
+/****　　输入框窗口抖动　　****/
+.inputError {
+    animation: inputErr 0.1s 5;
 }
-
-.MyInfo-onImg {
-	position: relative;
-	top: 220px;
-	left: 10px;
-}
-
-.MyInfo-onImg-name {
-	font-size: 40px;
-	font-style: initial;
-	color: white;
-}
-
-.MyInfo-onImg-motto {
-	color: lightgray;
-	font-size: 15px;
+@keyframes inputErr {
+    0%  {left: 0px ;top:  0px;}
+    25% {left: 8px ;top: -3px;}
+    50% {left: 0px ;top:  0px;}
+    75% {left: -8px;top:  3px;}
 }
 
 
-
-#MenuArea{
+/*　　页面右侧四方菜单区　　*******************************************/
+#MenuArea{	/*四方菜单区域定位*/
 	display: block;
 	position: absolute;
 	height: 10px;
@@ -120,12 +145,10 @@ p{
 	left: 65%;
 	top: 20%;
 }
-
-.Menu-child{
+.Menu-child{	/*子菜单通用样式*/
 	display: block;
 	background: #3FFCF6;
 	opacity: 0.8;
-	/*border: solid black 2px;*/
 	position: relative;
 	transform: rotate(45deg);
 	width:233px;
@@ -135,54 +158,45 @@ p{
 .Menu-child p{
 	opacity: 0;
 }
-
-.Menu-text{
+.Menu-text{		/*菜单文本通用样式*/
 	position: relative;
 	transform: rotate(-45deg);
 	text-align: center;
 	top: 83px;
 }
+/*　　四个菜单的各自定位　　*/
+.Menu-top{    top: 0;		left: 0;	 }
+.Menu-left{   top:-50px;    left: -187px;}
+.Menu-right{  top: -285px;  left: 187px; }
+.Menu-bottom{ top: -335px;	left: 0;	 }
+ 
 
-.Menu-top{
-	top: 0;
-	left: 0;
-}
 
-.Menu-left{
-	top:-50px ;
-	left: -187px;
-}
+/*  底部菜单区域      *******************************************/
 
-.Menu-right{
-	top: -285px;
-	left: 187px;
-}
-
-.Menu-bottom{
-	top: -335px;
-}
-
-#footerMenu{
+#footerMenu{	/*底部菜单定位*/
 	position: absolute;
-	bottom: 0px;
 	background: greenyellow;
+	bottom: 0px;
 	height: 50px;
 	width: 50%;
 }
-
-.footerMenuChild{
+.footerMenuChild{	/*菜单按钮通用类*/
 	position: absolute;
-	bottom: 0px;
 	background: black;
+	bottom: 0px;
 	height: 40px;
 	width: 150px;
 }
-
-#footerMenu01{left: 0%;}
+/*  各个子按钮位置　　*/
+#footerMenu01{left: 0%}
 #footerMenu02{left:15%}
 #footerMenu03{left:30%}
 #footerMenu04{left:45%}
 
+
+
+/*  右上角切换按钮　　*******************************************/
 #hideMenuBtn{
 	position: relative;
 	top: 10px;
@@ -192,33 +206,11 @@ p{
 	text-align: center;
 }
 
-.showMore{
-	animation: fadeIn 0.3s;
-}
-.hideMore{
-	animation: fadeOut 0.3s;
-}
-
-@keyframes fadeIn{
-	0%{
-		opacity:0;
-	}
-	100%{
-		opacity:1;
-		}
-}
-@keyframes fadeOut{
-	0%{
-		opacity: 1;
-		}
-	100%{
-		opacity:0;
-	}
-}
 
 
-/*TODOLIST Part*/
-#TodoListArea{
+/*  右侧TODOLIST区域　　*****************************************/
+
+#TodoListArea{	/*TodoList区域定位*/
 	display: block;
 	position: absolute;
 	height: 10px;
@@ -227,13 +219,12 @@ p{
 	top: 20%;
 	transform: scale(0);
 }
-
-#AddInput_TDL {
+#AddInput_TDL {		/*TodoList输入框*/
 	position: relative;
     width: 186px;
 }
 
-#TodoList {
+#TodoList {			/*TodoList组件body*/
 	position: relative;
 	left:-390px;
     border: solid black 2px;
@@ -242,10 +233,12 @@ p{
     overflow: hidden;
 }
 
-#EditArea_TDL {
+#EditArea_TDL {		/*编辑区域，按钮，文本框*/
     text-align: center;
 }
 
+
+/*  搜索框部分      *******************************************/
 #Search {
     display: inline-block;
     border: solid black 2px;
@@ -255,30 +248,7 @@ p{
     padding: 30px;
     float: left;
 }
-
 #SEOButton{
-    padding: 1px;
+	padding: 1px;
 }
 
-.inputError {
-    animation: inputErr 0.1s 5;
-}
-
-@keyframes inputErr {
-    0% {
-        left: 0px;
-        top: 0px;
-    }
-    25% {
-        left: 8px;
-        top: -3px;
-    }
-    50% {
-        left: 0px;
-        top: 0px;
-    }
-    75% {
-        left: -8px;
-        top: 3px;
-    }
-}
