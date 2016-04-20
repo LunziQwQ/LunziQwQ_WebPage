@@ -24,6 +24,12 @@ h4{
 	font-family: "微软雅黑";
 	text-shadow: 0px 1px 1px black;
 }
+h5{
+	font-size:40px;
+	color: white;
+	font-family: "microsoft yahei";
+	font-weight: 600;
+}
 ol{
 	margin-left:40px ;
 }
@@ -35,6 +41,9 @@ li{
 p{
 	margin: 10px;
 }
+
+
+
 
 /*　　整个页面的纹理背景　　*******************************************/
 #background{
@@ -162,7 +171,11 @@ p{
 	position: relative;
 	transform: rotate(-45deg);
 	text-align: center;
+	left: 10px;
 	top: 83px;
+}
+.Menu-text p{
+	font-size: 16px;
 }
 /*　　四个菜单的各自定位　　*/
 .Menu-top{    top: 0;		left: 0;	 }
@@ -176,23 +189,35 @@ p{
 
 #footerMenu{	/*底部菜单定位*/
 	position: absolute;
-	background: greenyellow;
 	bottom: 0px;
-	height: 50px;
+	height: 60px;
 	width: 50%;
+}
+#footerMenu-bg{
+	border-radius: 10px;
+	width: 100%;
+	height: 60px;
+	background: #E9604A;
+	box-shadow: 2px 1px 1px;
+	z-index: -10;
+	
 }
 .footerMenuChild{	/*菜单按钮通用类*/
 	position: absolute;
-	background: black;
-	bottom: 0px;
+	text-align: center;
+	/*background: black;*/
+	margin-left: 30px;
+	bottom: 10px;
 	height: 40px;
-	width: 150px;
+	width: 200px;
+	z-index: 10;
 }
 /*  各个子按钮位置　　*/
 #footerMenu01{left: 0%}
-#footerMenu02{left:15%}
-#footerMenu03{left:30%}
-#footerMenu04{left:45%}
+#footerMenu02{left:20%}
+#footerMenu03{left:40%}
+#footerMenu04{left:60%}
+#footerMenu05{left:80%}
 
 
 
@@ -219,22 +244,49 @@ p{
 	top: 20%;
 	transform: scale(0);
 }
+#TodoListTitle-bg{  /*TodoList带背景的标题*/
+	padding: 10px 20px 0 20px;
+	background: url(../img/TodoList_bg.png);
+	background-repeat: round;
+	height: 65px;	
+}
 #AddInput_TDL {		/*TodoList输入框*/
 	position: relative;
     width: 186px;
 }
 
+#EditArea_TDL input{  /*TodoList Input 输入框*/
+	display: inline-block;
+	float: left;
+	position: relative;
+	top: 0px;
+	width: 85%;
+	height: 40px;
+	border:.1px solid #ffffff;
+}
+.TDL_Btn{
+	display: inline-block;
+	float: right;
+	padding: 5px;
+	height: 33px;
+	width: 12%;
+	text-align: center;
+	font-size: 30px;
+	background: lightgray;
+}
+
+
 #TodoList {			/*TodoList组件body*/
 	position: relative;
-	left:-390px;
-    border: solid black 2px;
-    width: 480px;
+	left:-590px;
+    width: 680px;
     padding: 30px;
     overflow: hidden;
 }
 
 #EditArea_TDL {		/*编辑区域，按钮，文本框*/
     text-align: center;
+    background: white;
 }
 
 

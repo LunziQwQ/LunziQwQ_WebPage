@@ -47,7 +47,7 @@
 		<div class="Menu-right Menu-child" onmouseenter="showMore(this)" onmouseleave="hideMore(this)">
 			<div class="Menu-text">
 				<h1>推荐</h1>
-				<p>这里是我个人喜欢的东西，音乐，网站，文章</p>
+				<p>个人喜欢音乐，网站，文章</p>
 			</div>
 		</div>
 		<div class="Menu-bottom Menu-child" onmouseenter="showMore(this)" onmouseleave="hideMore(this)">
@@ -60,35 +60,33 @@
 	
 	<div id="TodoListArea">
 		<div id="TodoList">
-			<h3>TodoList</h3>
+			<div id="TodoListTitle-bg"><h5>TodoList</h5></div>
+			<div id = "EditArea_TDL">
+				<div>
+					<input id="AddInput_TDL" type="text" name="text" onfocus="inputFlag = this;">
+					<div class="TDL_Btn">Edit</div>
+						<!--<button onclick="onAddClick()">Add</button>
+						<button onclick="onClearClick()">Clear</button>
+						<button onclick="onFinishClick()">Finish</button>
+						<select id="FinishTDL"></select>-->
+				</div>
+			</div>
 			<ol id="list_TD">
 
 			</ol>
-			<div id = "EditArea_TDL">
-				<br>
-				<div style="border: solid 1px lightgray;">
-					<p>
-						<input id="AddInput_TDL" type="text" name="text" onfocus="inputFlag = this;">
-					</p>
-					<p>
-						<button onclick="onAddClick()">Add</button>
-						<button onclick="onClearClick()">Clear</button>
-						<button onclick="onFinishClick()">Finish</button>
-						<select id="FinishTDL"></select>
-					</p>
-				</div>
-			</div>
+			
 		</div>
 		
 	</div>
 	
 	<div id ='footerMenu'>
+		<div id="footerMenu-bg"></div>
 		<div id="footerMenu01" class="footerMenuChild">
+			<h5>Search</h5>
 			
-
 		</div>
 		<div id="footerMenu02" class="footerMenuChild">
-			
+			<h5>Curriculum</h5>
 			
 		</div>
 		<div id="footerMenu03" class="footerMenuChild">
@@ -99,7 +97,10 @@
 			
 			
 		</div>
-		
+		<div id="footerMenu05" class="footerMenuChild">
+			
+			
+		</div>
 		
 		
 		
@@ -121,6 +122,7 @@
 	下部初始蓝色，暂定按钮，搜索，搬运或实现何种工具，四级查询，课程表，等。。。  样式矩形结合梯形，hover上方加横条，色彩加深。
 	切换TODOLIST后下部按钮改为原4个Menu，色彩风格切换绿色配合todolist，切换特效
 	bottom botton :, search , Music ,siji cha xun , daily Tools
+	Search 向上动画，
 -->
     	
     
