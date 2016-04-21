@@ -1,12 +1,78 @@
-ShowMyBirthday();
-
+//=================================================
+//  全局变量，频繁使用的HTML元素
 myInfo=document.querySelector("#MyInfo");
 menuArea=document.querySelector("#MenuArea")
 todoList=document.querySelector("#TodoListArea")
 
+//=================================================
+//  初始化页面，工具，显示
+storage = window.localStorage;
+ShowMyBirthday();
+showTDL();
+
+//=================================================
+//  Flag部分，实现一些需要标记状态的逻辑
 openFlag=false;
 menuAreaFlag=true;
-function ShowMyBirthday(){
+
+//=================================================
+//  全局通用函数
+function clearInput(input) {  //清空输入框中当前文本
+    input.value = "";
+}
+
+function InputError(input) {  //输入错误时输入框动画
+    input.className += ' inputError';
+    setTimeout(function(){
+        input.className = '';
+    }, 500);
+}
+
+document.onclick=function(){  //点击监听，点击后隐藏OpenFlag的页面
+	if(openFlag){
+		if(openFlag==myInfo) ActionAnimation('hide',myInfo);		
+		openFlag=false;
+	}
+}
+
+addEventListener("keyup", function (event) {  //键盘Enter监听，捕获后触发对应效果
+    if (event.keyCode==13) {
+        if (inputFlag == document.querySelector('#SearchInput')) {
+            onSearchClick();
+        } else 
+		if (inputFlag == document.querySelector('#AddInput_TDL')){
+            onAddClick();
+        }
+    }
+});
+
+//=================================================
+//  页面动画部分
+function ActionAnimation(mode,element){  //触发页面动画，传递动画类型和触发元素
+	if(mode=='show') AnimationShow(element);
+	if(mode=='hide') AnimationHide(element);
+}
+
+//=======================
+//  各种类型动画，传递触发元素
+function AnimationShow(element){  //缩放显示
+	element.className+=' showTheBlock'
+	setTimeout(function(){
+		element.style.transform='scale(1)'
+		element.className='';
+	},290)
+}
+function AnimationHide(element){  //缩放隐藏
+	element.className+=' hideTheBlock'
+	setTimeout(function(){
+		element.style.transform='scale(0)'
+		element.className='';
+	},290)
+}
+
+//=================================================
+//  左上角Lv区域
+function ShowMyBirthday(){  //计算年龄并显示
     var date = new Date();
     var nowYear = date.getFullYear();
     var myAge = nowYear - 1997;
@@ -15,57 +81,33 @@ function ShowMyBirthday(){
     document.querySelector("#lv").innerHTML = myAge;
 }
 
-function onLevelClick(){
+function onLevelClick(){  //点击lv部分显示个人信息
 	ActionAnimation('show',myInfo);
-	openFlag=myInfo;
-	(event||window.event).cancelBubble=true;
-	//阻止事件冒泡
+	openFlag=myInfo;      //传递当前已达开的页面，点击其他区域时会捕获
+	(event||window.event).cancelBubble=true;  //阻止事件冒泡
 }
 
-function onHideMenuClick(){
+//=================================================
+//  右上角切换模块按钮
+function onSwitchClick(){
 	if(menuAreaFlag){
 		ActionAnimation('hide',menuArea);
 		setTimeout("ActionAnimation('show', todoList)", 300);
-		menuAreaFlag=false;
-		
+		menuAreaFlag=false;  //传递当前模块
 	}else{
 		ActionAnimation('hide', todoList);
 		setTimeout("ActionAnimation('show',menuArea)", 300);
-		menuAreaFlag=true;
+		menuAreaFlag=true;   //传递当前模块
 	}
-	(event||window.event).cancelBubble=true;
-	//阻止事件冒泡
+	(event||window.event).cancelBubble=true;  //阻止事件冒泡
 }
 
-function ActionAnimation(mode,element){
-	if(mode=='show') AnimationShow(element);
-	if(mode=='hide') AnimationHide(element);
-}
-function AnimationShow(element){
-	element.className+=' showTheBlock'
-	setTimeout(function(){
-		element.style.transform='scale(1)'
-		element.className='';
-	},290)
-}
+//=================================================
+//  右侧四方菜单功能区域
 
-function AnimationHide(element){
-	element.className+=' hideTheBlock'
-	setTimeout(function(){
-		element.style.transform='scale(0)'
-		element.className='';
-	},290)
-}
-
-document.onclick=function(){
-	if(openFlag){
-		if(openFlag==myInfo) ActionAnimation('hide',myInfo);
-		
-		openFlag=false;
-	}
-}
-
-function showMore(element){
+//=======================
+//  Menu Part
+function showMore(element){  //鼠标焦点在菜单上时显示详细
 	var more = element.querySelector('p');
 	more.className+=' showMore';
 	setTimeout(function(){
@@ -74,7 +116,7 @@ function showMore(element){
 	},290)
 }
 
-function hideMore(element){
+function hideMore(element){  //鼠标焦点离开菜单上时隐藏详细
 	var more=element.querySelector('p');
 	more.className+=' hideMore';
 	setTimeout(function(){
@@ -83,13 +125,9 @@ function hideMore(element){
 	},290)
 }
 
-//TODOLIST Part
-
-storage = window.localStorage;
-showTDL();
-showTDLSelect();
-
-function showTDL() {
+//=======================
+//  TodoList Part
+function showTDL() {  //加载显示TodoList的项目
     var list = loadTDL();
     var temp = "";
     for (var i = 0; i < list.length; i++) {
@@ -98,30 +136,21 @@ function showTDL() {
     document.getElementById("list_TD").innerHTML = temp;
 }
 
-function showTDLSelect() {
-    var TDLLength = loadTDL().length;
-    var temp = "";
-    for (var i = 0; i < TDLLength; i++) {
-        var j = i + 1;
-        temp += "<option value='" + j + "'>" + j + "</option>";
-    }
-    document.getElementById("FinishTDL").innerHTML = temp;
-}
-
-function loadTDL() {
-    return JSON.parse(storage.TDL || '[]');
-}
-
-function saveTDL(nowText) {
+function saveTDL(nowText) {  //将当前的TodoList存储进LocalStorage
     storage.TDL = JSON.stringify(nowText);
 }
 
-function addTDL() {
+function loadTDL() {  //读取LocalStorage中存储的TodoList项目
+    return JSON.parse(storage.TDL || '[]');
+}
+
+function addTDL() {  //添加新的TodoList项目
     var input = document.querySelector("#AddInput_TDL");
     var list = loadTDL();
     var addText;
     addText = input.value;
-    if (addText.length == 0 || addText.length >= 35) {
+    //输入检查并存储
+    if (addText.length == 0 || addText.length >= 35 || !addText) {
         InputError(input);
     } else {
         list[list.length] = {TDL: addText};
@@ -129,21 +158,30 @@ function addTDL() {
     }
 }
 
-function deleteTDL(select) {
+function deleteTDL(select) {  //删除指定的TodoList项目
     var list = loadTDL();
     list.splice(select - 1, 1);
     saveTDL(list);
 }
 
-function clearTDL() {
+function clearTDL() {  //清空TodoList
     storage.TDL = '';
 }
 
-function clearInput(input) {
-    input.value = "";
+function onAddClick() {
+    addTDL();
+    showTDL();
+    clearInput(document.querySelector("#AddInput_TDL"));
 }
 
-function createGetURL() {
+function onClearClick() {
+    clearTDL();
+    showTDL();
+}
+
+//=======================
+//  Search Part
+function createGetURL() {  //处理搜索内容并生成Get请求
     var SEOList = {
         "Bing": "http://cn.bing.com/search?q=",
         "Google": "http://www.google.co.jp/?gws_rd=ssl#q=",
@@ -158,51 +196,12 @@ function createGetURL() {
     return SEOList[select_value] + search_text;
 }
 
-function onAddClick() {
-    addTDL();
-    showTDL();
-    showTDLSelect();
-    clearInput(document.querySelector("#AddInput_TDL"));
-}
-
-function onClearClick() {
-    clearTDL();
-    showTDL();
-    showTDLSelect();
-}
-
-function onFinishClick() {
-    var select = document.getElementById("FinishTDL");
-    var select_value = select.options[select.selectedIndex].value;
-    deleteTDL(select_value);
-    showTDL();
-    showTDLSelect();
-}
-
 function onSearchClick() {
     var input = document.querySelector("#SearchInput");
     var URL = createGetURL();
-    if (!URL) {
-        InputError(input);
-    } else {
-        window.open(URL);
-    }
+    //输入检查并跳转新窗口
+    if (!URL){ InputError(input);}
+  	else{ window.open(URL);}
+  	
     clearInput(input);
 }
-
-function InputError(input) {
-    input.className += ' inputError';
-    setTimeout(function(){
-        input.className = '';
-    }, 500);
-}
-
-addEventListener("keyup", function (event) {
-    if (event.keyCode==13) {
-        if (inputFlag == document.querySelector('#SearchInput')) {
-            onSearchClick();
-        } else if (inputFlag == document.querySelector('#AddInput_TDL')){
-            onAddClick();
-        }
-    }
-});

@@ -30,20 +30,13 @@ h5{
 	font-family: "microsoft yahei";
 	font-weight: 600;
 }
-ol{
-	margin-left:40px ;
-}
 li{
-	list-style:decimal;
 	font-family: "microsoft yahei";
 	font-size: 20px;
 }
 p{
 	margin: 10px;
 }
-
-
-
 
 /*　　整个页面的纹理背景　　*******************************************/
 #background{
@@ -54,14 +47,12 @@ p{
 	z-index: -10;
 }
 
-
 /*　　左上角Level部分　　*******************************************/
 #Level {
 	position: absolute;
 	padding: 0 10px 0 10px;
 	left: 10px;
 }
-
 
 /*　　点击level后弹出的MyInfo页面部分　　******************************/
 #MyInfo {
@@ -98,9 +89,7 @@ p{
 	font-size: 15px;
 }
 
-
 /*　　动画效果，关键帧与对应类　　**************************************/
-
 /****　　大小缩放　　****/
 .showTheBlock{
 	animation: showBlock 0.3s;
@@ -144,7 +133,6 @@ p{
     75% {left: -8px;top:  3px;}
 }
 
-
 /*　　页面右侧四方菜单区　　*******************************************/
 #MenuArea{	/*四方菜单区域定位*/
 	display: block;
@@ -182,18 +170,16 @@ p{
 .Menu-left{   top:-50px;    left: -187px;}
 .Menu-right{  top: -285px;  left: 187px; }
 .Menu-bottom{ top: -335px;	left: 0;	 }
- 
-
 
 /*  底部菜单区域      *******************************************/
-
 #footerMenu{	/*底部菜单定位*/
 	position: absolute;
 	bottom: 0px;
 	height: 60px;
 	width: 50%;
+	min-width: 960px;
 }
-#footerMenu-bg{
+#footerMenu-bg{  /*底部菜单背景*/
 	border-radius: 10px;
 	width: 100%;
 	height: 60px;
@@ -219,10 +205,8 @@ p{
 #footerMenu04{left:60%}
 #footerMenu05{left:80%}
 
-
-
 /*  右上角切换按钮　　*******************************************/
-#hideMenuBtn{
+#switchBtn{
 	position: relative;
 	top: 10px;
 	float: right;
@@ -231,10 +215,7 @@ p{
 	text-align: center;
 }
 
-
-
 /*  右侧TODOLIST区域　　*****************************************/
-
 #TodoListArea{	/*TodoList区域定位*/
 	display: block;
 	position: absolute;
@@ -254,17 +235,14 @@ p{
 	position: relative;
     width: 186px;
 }
-
 #EditArea_TDL input{  /*TodoList Input 输入框*/
 	display: inline-block;
-	float: left;
 	position: relative;
-	top: 0px;
 	width: 85%;
 	height: 40px;
 	border:.1px solid #ffffff;
 }
-.TDL_Btn{
+.TDL_Btn{ /*TodoList 输入框右侧的Edit按钮*/
 	display: inline-block;
 	float: right;
 	padding: 5px;
@@ -274,8 +252,12 @@ p{
 	font-size: 30px;
 	background: lightgray;
 }
-
-
+#list_TD li{    /*TodoList条目样式*/
+	display: block;
+	background: white;
+	padding: 10px;
+	border-top: solid 1px lightgray;	
+}
 #TodoList {			/*TodoList组件body*/
 	position: relative;
 	left:-590px;
@@ -283,7 +265,6 @@ p{
     padding: 30px;
     overflow: hidden;
 }
-
 #EditArea_TDL {		/*编辑区域，按钮，文本框*/
     text-align: center;
     background: white;
@@ -303,4 +284,3 @@ p{
 #SEOButton{
 	padding: 1px;
 }
-
