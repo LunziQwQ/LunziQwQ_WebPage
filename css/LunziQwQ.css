@@ -222,7 +222,7 @@ p{
 	height: 10px;
 	width:10px;
 	left: 77%;
-	top: 20%;
+	top: 15%;
 	transform: scale(0);
 }
 #TodoListTitle-bg{  /*TodoList带背景的标题*/
@@ -234,6 +234,9 @@ p{
 #AddInput_TDL {		/*TodoList输入框*/
 	position: relative;
     width: 186px;
+    color: lightgray;
+    padding: 4px;
+    font-size: 18px;
 }
 #EditArea_TDL input{  /*TodoList Input 输入框*/
 	display: inline-block;
@@ -246,16 +249,33 @@ p{
 	display: inline-block;
 	float: right;
 	padding: 5px;
-	height: 33px;
+	height: 40px;
 	width: 12%;
 	text-align: center;
 	font-size: 30px;
 	background: lightgray;
 }
+.checkBox_TDL{  /*TodoList文本左侧的复选框*/
+	position: relative;
+	float:left;
+	top: -5px;
+	padding:0 10px 0 10px;
+	margin-right: 10px;
+	text-align: center;
+	border-right: solid 1px lightgray;
+}
+.checkBox_TDL input{
+	height:30px;
+	width: 30px;
+	opacity: 0;
+}
+.checkBox_TDL input:checked{
+	opacity: 1;
+	background-color: coral;
+}
 #list_TD li{    /*TodoList条目样式*/
-	display: block;
 	background: white;
-	padding: 10px;
+	padding: 10px 10px 10px 0;
 	border-top: solid 1px lightgray;	
 }
 #TodoList {			/*TodoList组件body*/
@@ -269,7 +289,6 @@ p{
     text-align: center;
     background: white;
 }
-
 
 /*  搜索框部分      *******************************************/
 #Search {

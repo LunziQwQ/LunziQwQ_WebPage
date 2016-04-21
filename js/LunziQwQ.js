@@ -1,14 +1,16 @@
 //=================================================
 //  全局变量，频繁使用的HTML元素
 myInfo=document.querySelector("#MyInfo");
-menuArea=document.querySelector("#MenuArea")
-todoList=document.querySelector("#TodoListArea")
+menuArea=document.querySelector("#MenuArea");
+todoList=document.querySelector("#TodoListArea");
+input_TDL=document.querySelector("#AddInput_TDL");
 
 //=================================================
 //  初始化页面，工具，显示
 storage = window.localStorage;
 ShowMyBirthday();
 showTDL();
+changeInputInfo('show');
 
 //=================================================
 //  Flag部分，实现一些需要标记状态的逻辑
@@ -40,7 +42,7 @@ addEventListener("keyup", function (event) {  //键盘Enter监听，捕获后触
         if (inputFlag == document.querySelector('#SearchInput')) {
             onSearchClick();
         } else 
-		if (inputFlag == document.querySelector('#AddInput_TDL')){
+		if (inputFlag == input_TDL){
             onAddClick();
         }
     }
@@ -131,7 +133,7 @@ function showTDL() {  //加载显示TodoList的项目
     var list = loadTDL();
     var temp = "";
     for (var i = 0; i < list.length; i++) {
-        temp += "<li>" + list[i].TDL + "</li>";
+        temp += "<li>" + "<div class='checkBox_TDL'>" + "<input type='checkbox' id='" + i + "' value='" + i + "'>" + "</div>" + list[i].TDL + "</li>";
     }
     document.getElementById("list_TD").innerHTML = temp;
 }
@@ -145,10 +147,9 @@ function loadTDL() {  //读取LocalStorage中存储的TodoList项目
 }
 
 function addTDL() {  //添加新的TodoList项目
-    var input = document.querySelector("#AddInput_TDL");
     var list = loadTDL();
     var addText;
-    addText = input.value;
+    addText = input_TDL.value;
     //输入检查并存储
     if (addText.length == 0 || addText.length >= 35 || !addText) {
         InputError(input);
@@ -171,7 +172,7 @@ function clearTDL() {  //清空TodoList
 function onAddClick() {
     addTDL();
     showTDL();
-    clearInput(document.querySelector("#AddInput_TDL"));
+    clearInput(input_TDL);
 }
 
 function onClearClick() {
@@ -179,6 +180,21 @@ function onClearClick() {
     showTDL();
 }
 
+function onInputFocus(){
+	inputFlag = this;
+	changeInputInfo('hide');
+	input_TDL.style.color='black';
+}
+
+function onInputBlur(){
+	changeInputInfo('show');
+	input_TDL.style.color='lightgray'
+}
+
+function changeInputInfo(mode){
+	if (mode == 'show') input_TDL.value="   请在这里输入您要添加的事项…";
+	if (mode == 'hide') clearInput(input_TDL);
+}
 //=======================
 //  Search Part
 function createGetURL() {  //处理搜索内容并生成Get请求
