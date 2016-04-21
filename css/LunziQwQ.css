@@ -260,7 +260,7 @@ p{
 }
 #TodoList {			/*TodoList组件body*/
 	position: relative;
-	left:-590px;
+	left:-490px;
     width: 680px;
     padding: 30px;
     overflow: hidden;
