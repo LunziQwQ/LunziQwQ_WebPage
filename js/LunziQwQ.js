@@ -152,7 +152,7 @@ function addTDL() {  //添加新的TodoList项目
     addText = input_TDL.value;
     //输入检查并存储
     if (addText.length == 0 || addText.length >= 35 || !addText) {
-        InputError(input);
+        InputError(input_TDL);
     } else {
         list[list.length] = {TDL: addText};
         saveTDL(list);
@@ -181,7 +181,7 @@ function onClearClick() {
 }
 
 function onInputFocus(){
-	inputFlag = this;
+	inputFlag =input_TDL;
 	changeInputInfo('hide');
 	input_TDL.style.color='black';
 }
