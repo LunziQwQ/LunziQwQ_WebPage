@@ -246,6 +246,7 @@ p{
 	border:.1px solid #ffffff;
 }
 .TDL_Btn{ /*TodoList 输入框右侧的Edit按钮*/
+	position: relative;
 	display: inline-block;
 	float: right;
 	padding: 5px;
@@ -254,6 +255,12 @@ p{
 	text-align: center;
 	font-size: 30px;
 	background: lightgray;
+}
+.TDL_Btn_Clear{
+	display: block;
+}
+.TDL_Btn_Finish{
+	display: block;
 }
 .checkBox_TDL{  /*TodoList文本左侧的复选框*/
 	position: relative;

@@ -64,11 +64,11 @@
 			<div id = "EditArea_TDL">
 				<div>
 					<input id="AddInput_TDL" type="text" onfocus="onInputFocus()" onblur="onInputBlur()">
-					<div class="TDL_Btn">Edit</div>
-						<!--<button onclick="onAddClick()">Add</button>
-						<button onclick="onClearClick()">Clear</button>
-						<button onclick="onFinishClick()">Finish</button>
-						<select id="FinishTDL"></select>-->
+					<div class="TDL_Btn" onclick="onEditClick()">Edit</div>
+					<div >
+						<div class="TDL_Btn_Clear TDL_Btn" onclick="onClearClick()">Clear</div>
+						<div class="TDL_Btn_Finish TDL_Btn" onclick="onFinishClick()">Finish</div>	
+					</div>
 				</div>
 			</div>
 			<ol id="list_TD">
@@ -123,6 +123,9 @@
 	切换TODOLIST后下部按钮改为原4个Menu，色彩风格切换绿色配合todolist，切换特效
 	bottom botton :, search , Music ,siji cha xun , daily Tools
 	Search 向上动画，
+	EDIT按钮逻辑，z-index: title>editErea>ol;
+	openflag以及对应函数数据结构替换为列表，并支持同时关闭当前所有的openflag
+	登陆界面，逻辑，普遍的通知样式
 -->
     	
     

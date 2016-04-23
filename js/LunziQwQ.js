@@ -180,6 +180,14 @@ function onClearClick() {
     showTDL();
 }
 
+function onEditClick(){
+	
+}
+
+function onFinishClick(){
+	
+}
+
 function onInputFocus(){
 	inputFlag =input_TDL;
 	changeInputInfo('hide');
