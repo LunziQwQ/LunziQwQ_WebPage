@@ -181,7 +181,7 @@ function onClearClick() {
 }
 
 function onEditClick(){
-	
+	ActionAnimation()
 }
 
 function onFinishClick(){

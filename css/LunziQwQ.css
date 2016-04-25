@@ -14,24 +14,20 @@ h3{
 	font-size:60px;
 	color: #55C3B5;
 	font-weight: 900;
-	font-family: "微软雅黑";
 	text-shadow: 0px 1px 1px black;
 }
 h4{
 	font-size:40px;
 	color: #55C3B5;
 	font-weight: 900;
-	font-family: "微软雅黑";
 	text-shadow: 0px 1px 1px black;
 }
 h5{
 	font-size:40px;
 	color: white;
-	font-family: "microsoft yahei";
 	font-weight: 600;
 }
 li{
-	font-family: "microsoft yahei";
 	font-size: 20px;
 }
 p{
@@ -191,7 +187,6 @@ p{
 .footerMenuChild{	/*菜单按钮通用类*/
 	position: absolute;
 	text-align: center;
-	/*background: black;*/
 	margin-left: 30px;
 	bottom: 10px;
 	height: 40px;
@@ -229,7 +224,7 @@ p{
 	padding: 10px 20px 0 20px;
 	background: url(../img/TodoList_bg.png);
 	background-repeat: round;
-	height: 65px;	
+	height: 65px;
 }
 #AddInput_TDL {		/*TodoList输入框*/
 	position: relative;
@@ -243,7 +238,7 @@ p{
 	position: relative;
 	width: 85%;
 	height: 40px;
-	border:.1px solid #ffffff;
+	border:0.1px solid #ffffff;
 }
 .TDL_Btn{ /*TodoList 输入框右侧的Edit按钮*/
 	position: relative;
@@ -256,11 +251,20 @@ p{
 	font-size: 30px;
 	background: lightgray;
 }
-.TDL_Btn_Clear{
-	display: block;
+#TDL_Btn_Area {
+    position: relative;
+    width: 680px;
+    height:0;
+    left: 86.5%;
+    opacity:0;
 }
-.TDL_Btn_Finish{
+#TDL_Btn_Clear{
 	display: block;
+    float: none;
+}
+#TDL_Btn_Finish {
+    display: block;
+    float: none;
 }
 .checkBox_TDL{  /*TodoList文本左侧的复选框*/
 	position: relative;
@@ -280,10 +284,14 @@ p{
 	opacity: 1;
 	background-color: coral;
 }
-#list_TD li{    /*TodoList条目样式*/
-	background: white;
-	padding: 10px 10px 10px 0;
-	border-top: solid 1px lightgray;	
+#list_TD li { /*TodoList条目样式*/
+    background: white;
+    padding: 10px 10px 10px 0;
+    border-top: solid 1px lightgray;
+    border-bottom: solid 1px lightgray;
+}
+#list_TD{
+    min-height:100px;
 }
 #TodoList {			/*TodoList组件body*/
 	position: relative;
