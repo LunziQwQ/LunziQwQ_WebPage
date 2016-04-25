@@ -129,6 +129,16 @@ p{
     75% {left: -8px;top:  3px;}
 }
 
+/****　　TodoList菜单下拉　　****/
+.pullDownMenu{
+	animation: DownMenu 0.2s;
+}
+
+@keyframes DownMenu{
+	0%{top: -100px;}
+	100%{top: 0px;}
+}
+
 /*　　页面右侧四方菜单区　　*******************************************/
 #MenuArea{	/*四方菜单区域定位*/
 	display: block;
@@ -255,8 +265,9 @@ p{
     position: relative;
     width: 680px;
     height:0;
-    left: 86.5%;
-    opacity:0;
+    left: 86.53%;
+    top: -100px;
+    z-index: -1;
 }
 #TDL_Btn_Clear{
 	display: block;
@@ -289,9 +300,12 @@ p{
     padding: 10px 10px 10px 0;
     border-top: solid 1px lightgray;
     border-bottom: solid 1px lightgray;
+    z-index: -2;
 }
 #list_TD{
+	position: relative;
     min-height:100px;
+    z-index: -2;
 }
 #TodoList {			/*TodoList组件body*/
 	position: relative;

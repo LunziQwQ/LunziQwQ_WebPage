@@ -4,6 +4,7 @@ myInfo=document.querySelector("#MyInfo");
 menuArea=document.querySelector("#MenuArea");
 todoList=document.querySelector("#TodoListArea");
 input_TDL=document.querySelector("#AddInput_TDL");
+pullDownMenu=document.querySelector("#TDL_Btn_Area");
 
 //=================================================
 //  初始化页面，工具，显示
@@ -181,7 +182,11 @@ function onClearClick() {
 }
 
 function onEditClick(){
-	ActionAnimation()
+	pullDownMenu.className+=' pullDownMenu'
+	setTimeout(function(){
+		pullDownMenu.style.top='0';
+		pullDownMenu.className='';
+	},190)
 }
 
 function onFinishClick(){
