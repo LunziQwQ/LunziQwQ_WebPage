@@ -4,9 +4,11 @@ myInfo=new MyInfo();
 
 
 openFlag=new Array();
+menuAreaFlag=true;
 
 
 myInfo.showAge();
+
 
 
 function MyInfo(){
@@ -22,10 +24,14 @@ function MyInfo(){
     	document.querySelector("#lv").innerHTML = myAge;
 	}
 
-	this.onClick=function(){
-		ActionAnimation('show',myInfo);
-		openFlag.push(myInfo);      //传递当前已达开的页面，点击其他区域时会捕获
+	this.onclick=function(){
+		animation.scaleShow(myInfo.element,300)
+		openFlag.push(myInfo.element);      //传递当前已达开的页面，点击其他区域时会捕获
 		(event||window.event).cancelBubble=true;  //阻止事件冒泡
+	}
+
+	this.close=function(){
+		animation.scaleHide(myInfo.element,300)
 	}
 
 }
@@ -67,15 +73,83 @@ function Animation(){
 			element.classname='';
 		},time);
 	}
+
+	this.pullDownMenu=function(element,time){
+		element.classname+=' pullDownMenu';
+		element.style.animationDuration=time+'ms';
+		setTimeout(function(){
+			element.style.top='0';
+			element.className='';
+		},time)
+	}
 }
 
 
+function RightMenu(){
+
+	this.element=document.querySelector("#MenuArea");
+
+	var moreNote=this.element.querySelector('p');
+
+	this.showMore=function(){
+		animation.opacityShow(moreNote,300);
+	}
+
+	this.hideMore=function(){
+		animation.opacityHide(moreNote,300);
+	}
+
+	this.switch=function(){
+		if(menuAreaFlag){
+			animation.scaleHide(RightMenu.element,300)
+			setTimeout("animation.scaleShow(TodoList.element,300)", 300);
+			menuAreaFlag=false;  //传递当前模块
+		}else{
+			animation.scaleHide(TodoList.element,300)
+			setTimeout("animation.scaleShow(RightMenu.element,300)", 300);
+			menuAreaFlag=true;   //传递当前模块
+		}
+		(event||window.event).cancelBubble=true;  //阻止事件冒泡
+	}
+}
+
+
+function TodoList(){
+
+	this.element=document.querySelector("#TodoListArea");
+
+	var pullDownMenu=document.querySelector(#TDL_Btn_Area)
+
+	this.load=function(){
+   		return JSON.parse(storage.TDL || '[]');
+	}
+
+	this.save=function(Text){
+    	storage.TDL = JSON.stringify(Text);
+	}
+
+	this.clear=function(){
+		storage.TDL='';
+	}
+
+	this.onEditClick=function(){
+		animation.pullDownMenu(pullDownMenu,200);
+	}
+
+	this.show=function(){
+
+	}
+
+
+}
+
+function Input(){
+	
+
+}
 //=================================================
 //  全局变量，频繁使用的HTML元素
-menuArea=document.querySelector("#MenuArea");
-todoList=document.querySelector("#TodoListArea");
 input_TDL=document.querySelector("#AddInput_TDL");
-pullDownMenu=document.querySelector("#TDL_Btn_Area");
 
 //=================================================
 //  初始化页面，工具，显示
@@ -102,9 +176,8 @@ function InputError(input) {  //输入错误时输入框动画
 }
 
 document.onclick=function(){  //点击监听，点击后隐藏OpenFlag的页面
-	if(openFlag){
-		if(openFlag==myInfo) ActionAnimation('hide',myInfo);		
-		openFlag=false;
+	while(openFlag.length>0){
+		openFlag.pop().close();
 	}
 }
 
@@ -120,70 +193,22 @@ addEventListener("keyup", function (event) {  //键盘Enter监听，捕获后触
 });
 
 //=================================================
-//  页面动画部分
-function ActionAnimation(mode,element){  //触发页面动画，传递动画类型和触发元素
-	if(mode=='show') AnimationShow(element);
-	if(mode=='hide') AnimationHide(element);
-}
 
 //=======================
 //  各种类型动画，传递触发元素
-function AnimationShow(element){  //缩放显示
-	element.className+=' showTheBlock'
-	setTimeout(function(){
-		element.style.transform='scale(1)'
-		element.className='';
-	},290)
-}
-function AnimationHide(element){  //缩放隐藏
-	element.className+=' hideTheBlock'
-	setTimeout(function(){
-		element.style.transform='scale(0)'
-		element.className='';
-	},290)
-}
 
 //=================================================
 //  左上角Lv区域
 
 //=================================================
-//  右上角切换模块按钮
-function onSwitchClick(){
-	if(menuAreaFlag){
-		ActionAnimation('hide',menuArea);
-		setTimeout("ActionAnimation('show', todoList)", 300);
-		menuAreaFlag=false;  //传递当前模块
-	}else{
-		ActionAnimation('hide', todoList);
-		setTimeout("ActionAnimation('show',menuArea)", 300);
-		menuAreaFlag=true;   //传递当前模块
-	}
-	(event||window.event).cancelBubble=true;  //阻止事件冒泡
-}
+
 
 //=================================================
 //  右侧四方菜单功能区域
 
 //=======================
 //  Menu Part
-function showMore(element){  //鼠标焦点在菜单上时显示详细
-	var more = element.querySelector('p');
-	more.className+=' showMore';
-	more.style.animationDuration='5000ms';
-	setTimeout(function(){
-		more.style.opacity='1'	
-		more.classname='';
-	},5000)
-}
 
-function hideMore(element){  //鼠标焦点离开菜单上时隐藏详细
-	var more=element.querySelector('p');
-	more.className+=' hideMore';
-	setTimeout(function(){
-		more.style.opacity='0';
-		more.className='';
-	},290)
-}
 
 //=======================
 //  TodoList Part
@@ -196,13 +221,7 @@ function showTDL() {  //加载显示TodoList的项目
     document.getElementById("list_TD").innerHTML = temp;
 }
 
-function saveTDL(nowText) {  //将当前的TodoList存储进LocalStorage
-    storage.TDL = JSON.stringify(nowText);
-}
 
-function loadTDL() {  //读取LocalStorage中存储的TodoList项目
-    return JSON.parse(storage.TDL || '[]');
-}
 
 function addTDL() {  //添加新的TodoList项目
     var list = loadTDL();
@@ -223,9 +242,6 @@ function deleteTDL(select) {  //删除指定的TodoList项目
     saveTDL(list);
 }
 
-function clearTDL() {  //清空TodoList
-    storage.TDL = '';
-}
 
 function onAddClick() {
     addTDL();
@@ -239,11 +255,7 @@ function onClearClick() {
 }
 
 function onEditClick(){
-	pullDownMenu.className+=' pullDownMenu'
-	setTimeout(function(){
-		pullDownMenu.style.top='0';
-		pullDownMenu.className='';
-	},190)
+	
 }
 
 function onFinishClick(){
