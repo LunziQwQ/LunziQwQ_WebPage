@@ -54,7 +54,7 @@
 		<div class="Menu-bottom Menu-child" onmouseenter="rightMenu.showMore(this)" onmouseleave="rightMenu.hideMore(this)">
 			<div class="Menu-text">
 				<h1>关于我</h1>
-				<p>About Me</p>
+				<p>喵喵喵喵喵</p>
 			</div>
 		</div>
 	</div>
@@ -84,10 +84,20 @@
 		<div id="footerMenu-bg"></div>
 		<div id="footerMenu01" class="footerMenuChild">
 			<h5>Search</h5>
+			<div id="Search">
+				<button id="SEOButton" onclick="search.onSearchClick()">Search</button>
+					<input id="SearchInput" type="text" onfocus= "inputText.onFocus(this)" onblur="inputText.onBlur(this)">
+					<select name="SEO" id="SEOSelect">
+					<option value="Bing">Bing</option>
+					<option value="Google">Google</option>
+					<option value="Github">Github</option>
+					<option value="Taobao">Taobao</option>
+					<option value="Bilibili">Bilibili</option>
+				</select>
+			</div>
 			
 		</div>
 		<div id="footerMenu02" class="footerMenuChild">
-			<h5>Curriculum</h5>
 			
 		</div>
 		<div id="footerMenu03" class="footerMenuChild">
@@ -107,7 +117,7 @@
 		
 	</div>
 
-
+	
 
 
 
@@ -124,8 +134,6 @@
 	切换TODOLIST后下部按钮改为原4个Menu，色彩风格切换绿色配合todolist，切换特效
 	bottom botton :, search , Music ,siji cha xun , daily Tools
 	Search 向上动画，
-	EDIT按钮逻辑，z-index: title>editErea>ol;
-	openflag以及对应函数数据结构替换为列表，并支持同时关闭当前所有的openflag
 	登陆界面，逻辑，普遍的通知样式
 -->
     	

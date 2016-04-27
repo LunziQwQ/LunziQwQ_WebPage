@@ -196,7 +196,7 @@ p{
 	position: relative;
 	border-radius: 10px;
 	width: 100%;
-	height: 60px;
+	min-height: 60px;
 	background: #E9604A;
 	box-shadow: 2px 1px 1px;
 	z-index: -10;
@@ -259,6 +259,7 @@ p{
 	width: 85%;
 	height: 40px;
 	border:0.1px solid #ffffff;
+	font-size: 25px;
 }
 .TDL_Btn{ /*TodoList 输入框右侧的Edit按钮*/
 	position: relative;
@@ -330,13 +331,21 @@ p{
 
 /*  搜索框部分      *******************************************/
 #Search {
+	top: -250px;
+	position: relative;
     display: inline-block;
-    border: solid black 2px;
+    border-radius: 10px;
     text-align: center;
-    width: 20em;
-    margin: 0 2em 2em 1em;
+    min-width: 300%;
     padding: 30px;
     float: left;
+    background-color: rgba(36,147,173,.5);
+}
+#SearchInput{
+	color: lightgray;
+	font-size: 25px;
+	width:60%;
+	height: 40px;
 }
 #SEOButton{
 	padding: 1px;

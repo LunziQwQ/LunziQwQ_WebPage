@@ -4,14 +4,16 @@ rightMenu = new RightMenu();
 animation = new Animation();
 myInfo = new MyInfo();
 todoList = new TodoList();
+search = new Search();
 inputText = new Input();
 //=================================================
 //  初始化页面，工具，显示
 storage = window.localStorage;
-openFlag = new Array();
+openFlag = [];
 myInfo.showAge();
 todoList.show();
 inputText.changeInfo(inputText.TodoList,'show');
+inputText.changeInfo(inputText.Search,'show');
 //=================================================
 //  全局事件监听
 document.onclick=function(){  /*点击监听，点击页面时隐藏现已打开（openFlag）的页面*/
@@ -23,6 +25,9 @@ addEventListener("keyup", function (event) {  /*键盘Enter监听，捕获后触
     if (event.keyCode==13) {
 		if (inputText.nowFocus == inputText.TodoList){
            todoList.onAddClick();
+        }
+		if (inputText.nowFocus == inputText.Search){
+           search.onSearchClick();
         }
     }
 });
@@ -82,6 +87,7 @@ function Animation(){
 //  输入框类
 function Input(){
 	this.TodoList = document.querySelector("#AddInput_TDL");
+	this.Search = document.querySelector("#SearchInput");
 	this.nowFocus = '';
 
 	this.clear=function(element){
@@ -103,8 +109,10 @@ function Input(){
 		if (mode == 'show') {
 			switch(element){
 				case this.TodoList:
-					element.value=todoList.inputInfo;
+					element.value = todoList.inputInfo;
 					break;
+				case this.Search:
+					element.value = search.inputInfo;
 			}
 		}else{
 			this.clear(element);
@@ -232,26 +240,29 @@ function TodoList(){
 
 //=======================
 //  Search Part
-function createGetURL() {  //处理搜索内容并生成Get请求
-    var SEOList = {
-        "Bing": "http://cn.bing.com/search?q=",
-        "Google": "http://www.google.co.jp/?gws_rd=ssl#q=",
-        "Bilibili": "http://search.bilibili.com/all?keyword=",
-        "Github": "https://github.com/search?utf8=✓&q=",
-        "Taobao": "https://s.taobao.com/search?q="
-    };
-    var select = document.getElementById("SEOSelect");
-    var select_value = select.options[select.selectedIndex].value;
-    var search_text = document.getElementById("SearchInput").value;
-    if (search_text.length == 0) return false;
-    return SEOList[select_value] + search_text;
-}
-function onSearchClick() {
-    var input = document.querySelector("#SearchInput");
-    var URL = createGetURL();
-    //输入检查并跳转新窗口
-    if (!URL){ InputError(input);}
-  	else{ window.open(URL);}
-  	
-    clearInput(input);
+function Search(){
+	this.element = document.querySelector("#Search");
+	this.inputInfo = " 请在这里输入您要搜索的内容…"
+    
+    var createGet = function(search_text){
+    	var SEOList = {
+	        "Bing": "http://cn.bing.com/search?q=",
+	        "Google": "http://www.google.co.jp/?gws_rd=ssl#q=",
+	        "Bilibili": "http://search.bilibili.com/all?keyword=",
+	        "Github": "https://github.com/search?utf8=✓&q=",
+	        "Taobao": "https://s.taobao.com/search?q="
+	    };
+  		var select = document.querySelector("#SEOSelect");
+	    var select_value = select.options[select.selectedIndex].value;
+	    if (search_text.length == 0) return false;
+	    return SEOList[select_value] + search_text;
+    }
+    
+	this.onSearchClick = function(){
+		var search_text = inputText.Search.value;
+		var URL = createGet(search_text);
+		if (!URL) inputText.errorReport(inputText.Search);
+		else window.open(URL);
+		inputText.clear(inputText.Search);
+	}
 }
