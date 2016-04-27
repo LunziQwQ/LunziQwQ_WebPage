@@ -36,28 +36,28 @@ function Animation(){
 			element.className='';
 		},290);
 	}
-	this.scaleHide=function(element){
-		element.className+=' hideTheBlock'
+	this.scaleHide = function(element){
+		element.className += ' hideTheBlock'
 		setTimeout(function(){
-			element.style.transform='scale(0)'
-			element.className='';
+			element.style.transform = 'scale(0)'
+			element.className = '';
 		},290);
 	}
-	this.opacityShow=function(element){
+	this.opacityShow = function(element){
 		element.className+=' showMore';
 		setTimeout(function(){
 			element.style.opacity='1'	
 			element.className='';
 		},290);
 	}
-	this.opacityHide=function(element){
-		element.className+=' hideMore';
+	this.opacityHide = function(element){
+		element.className += ' hideMore';
 		setTimeout(function(){
-			element.style.opacity='0';
-			element.className='';
+			element.style.opacity = '0';
+			element.className = '';
 		},290);
 	}
-	this.pullDownMenu=function(element){
+	this.pullDownMenu = function(element){
 		element.className += ' pullDownMenu';
 		setTimeout(function(){
 			element.style.top = '0';
@@ -124,10 +124,10 @@ function MyInfo(){
     	if (nowMonth<9) myAge -= 1;
     	document.querySelector("#lv").innerHTML = myAge;
 	}
-	this.show=function(){
+	this.show=function(event){
 		animation.scaleShow(myInfo.element)
-		openFlag.push(myInfo);      //传递当前已达开的页面，点击其他区域时会捕获
-		(event||window.event).cancelBubble=true;  //阻止事件冒泡
+		openFlag.push(myInfo);  //传递当前已达开的页面，点击其他区域时会捕获
+		event.cancelBubble=true;  //阻止事件冒泡
 	}
 	this.close=function(){
 		animation.scaleHide(myInfo.element)
@@ -161,7 +161,6 @@ function RightMenu(){
 			setTimeout("animation.scaleShow(rightMenu.element)", 300);
 			this.nowPart=true;   //传递当前模块
 		}
-		(event||window.event).cancelBubble=true;  //阻止事件冒泡
 	}
 }
 //=======================
@@ -207,10 +206,10 @@ function TodoList(){
 	    }
 	    document.querySelector("#list_TD").innerHTML = temp;
 	}
-	this.onEditClick = function(){
+	this.onEditClick = function(event){
 		animation.pullDownMenu(editMenu);
 		openFlag.push(todoList);
-		(event||window.event).cancelBubble=true;  //阻止事件冒泡
+		event.cancelBubble=true;  //阻止事件冒泡
 	}
 	this.onAddClick = function(){
 	    this.add();
@@ -247,7 +246,6 @@ function createGetURL() {  //处理搜索内容并生成Get请求
     if (search_text.length == 0) return false;
     return SEOList[select_value] + search_text;
 }
-
 function onSearchClick() {
     var input = document.querySelector("#SearchInput");
     var URL = createGetURL();

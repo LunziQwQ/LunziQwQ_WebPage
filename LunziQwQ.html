@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div id = "background"></div>
-	<div id="Level" onclick="myInfo.show()">
+	<div id="Level" onclick="myInfo.show(event);">
    		<p><h3>Lunzi</h3></p>
      	<p><h4>lv. <b id="lv"></b></h4></p>
     </div>
@@ -32,7 +32,8 @@
 	</div>		
 	
 	<div id="MenuArea">
-		<div class="Menu-top Menu-child" onmouseenter="rightMenu.showMore(this)" onmouseleave="rightMenu.hideMore(this)">
+		<div class="Menu-top Menu-child"
+		 onmouseenter="rightMenu.showMore(this)" onmouseleave="rightMenu.hideMore(this)">
 			<div class="Menu-text">
 				<h1>首页</h1>
 				<p>Lunzi的博客首页</p>
@@ -63,7 +64,7 @@
 			<div id="TodoListTitle-bg"><h5>TodoList</h5></div>
 			<div id = "EditArea_TDL">
 					<input id="AddInput_TDL" type="text" onfocus="inputText.onFocus(this)" onblur="inputText.onBlur(this)">
-					<div class="TDL_Btn" onclick="todoList.onEditClick()">Edit</div>
+					<div class="TDL_Btn" onclick="todoList.onEditClick(event)">Edit</div>
 					<div id="TDL_Btn_Area">
 
 						<div id="TDL_Btn_Clear" class="TDL_Btn" onclick="todoList.onClearClick()">Clear</div>
