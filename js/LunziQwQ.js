@@ -47,25 +47,25 @@ function Animation(){
 		element.className+=' showMore';
 		setTimeout(function(){
 			element.style.opacity='1'	
-			element.classname='';
+			element.className='';
 		},290);
 	}
 	this.opacityHide=function(element){
 		element.className+=' hideMore';
 		setTimeout(function(){
 			element.style.opacity='0';
-			element.classname='';
+			element.className='';
 		},290);
 	}
 	this.pullDownMenu=function(element){
-		element.classname += ' pullDownMenu';
+		element.className += ' pullDownMenu';
 		setTimeout(function(){
 			element.style.top = '0';
 			element.className = '';
 		},190)
 	}
 	this.pullUpMenu=function(element){
-		element.classname += ' pullUpMenu';
+		element.className += ' pullUpMenu';
 		setTimeout(function(){
 			element.style.top = '-100px';
 			element.className = '';

@@ -133,7 +133,7 @@ p{
 .pullDownMenu{
 	animation: DownMenu 0.2s;
 }
-.pullupMenu{
+.pullUpMenu{
 	animation: UpMenu 0.2s;
 }
 
