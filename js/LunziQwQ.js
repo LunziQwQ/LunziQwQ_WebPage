@@ -29,53 +29,47 @@ addEventListener("keyup", function (event) {  /*键盘Enter监听，捕获后触
 //=================================================
 //  页面动画类
 function Animation(){
-	this.scaleShow=function(element,time){
+	this.scaleShow=function(element){
 		element.className+=' showTheBlock'
-		element.style.animationDuration=time+'ms';
 		setTimeout(function(){
 			element.style.transform='scale(1)';
 			element.className='';
-		},time-10);
+		},290);
 	}
-	this.scaleHide=function(element,time){
+	this.scaleHide=function(element){
 		element.className+=' hideTheBlock'
-		element.style.animationDuration=time+'ms';
 		setTimeout(function(){
 			element.style.transform='scale(0)'
 			element.className='';
-		},time-10);
+		},290);
 	}
-	this.opacityShow=function(element,time){
+	this.opacityShow=function(element){
 		element.className+=' showMore';
-//		element.style.animationDuration = time + 'ms';
 		setTimeout(function(){
 			element.style.opacity='1'	
 			element.classname='';
-		},time-10);
+		},290);
 	}
-	this.opacityHide=function(element,time){
+	this.opacityHide=function(element){
 		element.className+=' hideMore';
-//		element.style.animationDuration = time + 'ms';
 		setTimeout(function(){
 			element.style.opacity='0';
 			element.classname='';
-		},time-10);
+		},290);
 	}
-	this.pullDownMenu=function(element,time){
+	this.pullDownMenu=function(element){
 		element.classname += ' pullDownMenu';
-		element.style.animationDuration = time + 'ms';
 		setTimeout(function(){
 			element.style.top = '0';
 			element.className = '';
-		},time-10)
+		},190)
 	}
-	this.pullUpMenu=function(element,time){
+	this.pullUpMenu=function(element){
 		element.classname += ' pullUpMenu';
-//		element.style.animationDuration = time + 'ms';
 		setTimeout(function(){
-			element.style.top = '-100';
+			element.style.top = '-100px';
 			element.className = '';
-		},time-10)
+		},190)
 	}
 	this.inputError=function(element){
 	    element.className += ' inputError';
@@ -131,12 +125,12 @@ function MyInfo(){
     	document.querySelector("#lv").innerHTML = myAge;
 	}
 	this.show=function(){
-		animation.scaleShow(myInfo.element,300)
+		animation.scaleShow(myInfo.element)
 		openFlag.push(myInfo);      //传递当前已达开的页面，点击其他区域时会捕获
 		(event||window.event).cancelBubble=true;  //阻止事件冒泡
 	}
 	this.close=function(){
-		animation.scaleHide(myInfo.element,300)
+		animation.scaleHide(myInfo.element)
 	}
 }
 
@@ -151,20 +145,20 @@ function RightMenu(){
 
 	this.showMore=function(element){
 		var moreNote=element.querySelector('p');
-		animation.opacityShow(moreNote,300);
+		animation.opacityShow(moreNote);
 	}
 	this.hideMore=function(element){
 		var moreNote=element.querySelector('p');
-		animation.opacityHide(moreNote,300);
+		animation.opacityHide(moreNote);
 	}
 	this.switchMode=function(){
 		if(this.nowPart){
-			animation.scaleHide(rightMenu.element,300)
-			setTimeout("animation.scaleShow(todoList.element,300)", 300);
+			animation.scaleHide(rightMenu.element)
+			setTimeout("animation.scaleShow(todoList.element)", 300);
 			this.nowPart=false;  //传递当前模块
 		}else{
-			animation.scaleHide(todoList.element,300)
-			setTimeout("animation.scaleShow(rightMenu.element,300)", 300);
+			animation.scaleHide(todoList.element)
+			setTimeout("animation.scaleShow(rightMenu.element)", 300);
 			this.nowPart=true;   //传递当前模块
 		}
 		(event||window.event).cancelBubble=true;  //阻止事件冒泡
@@ -176,9 +170,9 @@ function TodoList(){
 	this.element=document.querySelector("#TodoListArea");
 	this.inputInfo="   请在这里输入您要添加的事项…";
 
-	this.pullDownMenu=document.querySelector("#TDL_Btn_Area");
-	this.pullDownMenu.close=function(){
-		animation.pullUpMenu(this.pullDownMenu,200)
+	var editMenu=document.querySelector("#TDL_Btn_Area");
+	this.close=function(){
+		animation.pullUpMenu(editMenu)
 	}
 	this.load=function(){
    		return JSON.parse(storage.TDL || '[]');
@@ -209,8 +203,9 @@ function TodoList(){
 	    document.querySelector("#list_TD").innerHTML = temp;
 	}
 	this.onEditClick = function(){
-		animation.pullDownMenu(this.pullDownMenu,200);
-		openFlag.push(this.pullDownMenu);
+		animation.pullDownMenu(editMenu);
+		openFlag.push(todoList);
+		(event||window.event).cancelBubble=true;  //阻止事件冒泡
 	}
 	this.onAddClick = function(){
 	    this.add();
@@ -220,9 +215,11 @@ function TodoList(){
 	this.onClearClick = function(){
 	    this.clear();
 	    this.show();
+	    (event||window.event).cancelBubble=true;  //阻止事件冒泡
 	}
 	this.onFinishClick = function(){
 		
+		(event||window.event).cancelBubble=true;  //阻止事件冒泡
 	}
 }
 

@@ -193,6 +193,7 @@ p{
 	min-width: 960px;
 }
 #footerMenu-bg{  /*底部菜单背景*/
+	position: relative;
 	border-radius: 10px;
 	width: 100%;
 	height: 60px;
@@ -238,10 +239,12 @@ p{
 	transform: scale(0);
 }
 #TodoListTitle-bg{  /*TodoList带背景的标题*/
+	position: relative;
 	padding: 10px 20px 0 20px;
 	background: url(../img/TodoList_bg.png);
 	background-repeat: round;
 	height: 65px;
+	z-index: 10;
 }
 #AddInput_TDL {		/*TodoList输入框*/
 	position: relative;
@@ -267,6 +270,7 @@ p{
 	text-align: center;
 	font-size: 30px;
 	background: lightgray;
+	z-index: 10;
 }
 #TDL_Btn_Area {
     position: relative;
@@ -274,7 +278,7 @@ p{
     height:0;
     left: 86.53%;
     top: -100px;
-    z-index: -1;
+    z-index: 1;
 }
 #TDL_Btn_Clear{
 	display: block;
@@ -307,12 +311,10 @@ p{
     padding: 10px 10px 10px 0;
     border-top: solid 1px lightgray;
     border-bottom: solid 1px lightgray;
-    z-index: -2;
 }
 #list_TD{
 	position: relative;
     min-height:100px;
-    z-index: -2;
 }
 #TodoList {			/*TodoList组件body*/
 	position: relative;
