@@ -183,6 +183,11 @@ function TodoList(){
 	this.clear = function(){
 		storage.TDL='';
 	}
+	this.finish = function(index){
+		var list = this.load();
+		list.splice(index-1,1);
+		this.save(list);
+	}
 	this.add = function(){
 	    var list = this.load();
 	    var addText = inputText.TodoList.value;
@@ -198,7 +203,7 @@ function TodoList(){
 	    var list = this.load();
 	    var temp = "";
 	    for (var i = 0; i < list.length; i++) {
-	        temp += "<li>" + "<div class='checkBox_TDL'>" + "<input type='checkbox' id='" + i + "' value='" + i + "'>" + "</div>" + list[i].TDL + "</li>";
+	        temp += "<li>" + "<div class='checkBox_TDL'>" + "<input name='checkbox_TDL' type='checkbox' id='CB_TDL" + i + "' value='" + i + "'>" + "</div>" + list[i].TDL + "</li>";
 	    }
 	    document.querySelector("#list_TD").innerHTML = temp;
 	}
@@ -215,11 +220,14 @@ function TodoList(){
 	this.onClearClick = function(){
 	    this.clear();
 	    this.show();
-	    (event||window.event).cancelBubble=true;  //阻止事件冒泡
 	}
 	this.onFinishClick = function(){
-		
-		(event||window.event).cancelBubble=true;  //阻止事件冒泡
+		var list=document.getElementsByName("checkbox_TDL");
+		var length=list.length;
+		for(var i = length-1; i>=0; i--){
+			if (list[i].checked) this.finish(i+1);
+		}
+		this.show();
 	}
 }
 
