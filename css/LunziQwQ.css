@@ -133,7 +133,14 @@ p{
 .pullDownMenu{
 	animation: DownMenu 0.2s;
 }
+.pullupMenu{
+	animation: UpMenu 0.2s;
+}
 
+@keyframes UpMenu{
+	0%{top: 0px;}
+	100%{top: -100px;}
+}
 @keyframes DownMenu{
 	0%{top: -100px;}
 	100%{top: 0px;}

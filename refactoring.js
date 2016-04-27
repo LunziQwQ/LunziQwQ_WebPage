@@ -1,12 +1,16 @@
-animation=new Animation();
-myInfo=new MyInfo();
+
+//=================================================
+//  初始化页面，工具，显示
+storage=window.localStorage;
+openFlag = new Array();
+animation = new Animation();
+myInfo = new MyInfo();
+todoList=new TodoList();
+input = new Input();
 
 
-
-openFlag=new Array();
-menuAreaFlag=true;
-
-
+todoList.show();
+input.changeInfo(input.TodoList,'show');
 myInfo.showAge();
 
 
@@ -82,12 +86,21 @@ function Animation(){
 			element.className='';
 		},time)
 	}
+
+	this.inputError=function(element){
+	    element.className += ' inputError';
+	    setTimeout(function(){
+	        element.className = '';
+	    }, 500);
+	}
 }
 
 
 function RightMenu(){
 
 	this.element=document.querySelector("#MenuArea");
+
+	this.nowPart=true;
 
 	var moreNote=this.element.querySelector('p');
 
@@ -100,7 +113,7 @@ function RightMenu(){
 	}
 
 	this.switch=function(){
-		if(menuAreaFlag){
+		if(this.nowPart){
 			animation.scaleHide(RightMenu.element,300)
 			setTimeout("animation.scaleShow(TodoList.element,300)", 300);
 			menuAreaFlag=false;  //传递当前模块
@@ -118,7 +131,9 @@ function TodoList(){
 
 	this.element=document.querySelector("#TodoListArea");
 
-	var pullDownMenu=document.querySelector(#TDL_Btn_Area)
+	this.inputInfo="   请在这里输入您要添加的事项…";
+
+	var pullDownMenu=document.querySelector(#TDL_Btn_Area);
 
 	this.load=function(){
    		return JSON.parse(storage.TDL || '[]');
@@ -136,44 +151,88 @@ function TodoList(){
 		animation.pullDownMenu(pullDownMenu,200);
 	}
 
-	this.show=function(){
-
+	this.add=function(){
+	    var list = this.load();
+	    var addText = input.TodoList.value;
+	    //输入检查并存储
+	    if (addText.length == 0 || addText.length >= 35 || !addText) {
+	        input.errorReport(input.TodoList);
+	    } else {
+	        list[list.length] = {TDL: addText};
+	        this.save(list);
+	    }
 	}
 
+	this.show=function(){
+	    var list = this.load();
+	    var temp = "";
+	    for (var i = 0; i < list.length; i++) {
+	        temp += "<li>" + "<div class='checkBox_TDL'>" + "<input type='checkbox' id='" + i + "' value='" + i + "'>" + "</div>" + list[i].TDL + "</li>";
+	    }
+	    document.querySelector("#list_TD").innerHTML = temp;
+	}
+
+	this.onAddClick = function(){
+	    this.add();
+	    this.show();
+	    input.clear(input.TodoList);
+	}
+
+	this.onClearClick = function(){
+	    this.clear();
+	    this.show();
+	}
 
 }
 
 function Input(){
-	
 
+	this.TodoList = document.querySelector("#AddInput_TDL");
+	this.nowFocus = '';
+
+	this.clear=function(element){
+		element.value='';
+	}
+
+	this.errorReport=function(element){
+		animation.inputError(element);
+	}
+
+	this.onFocus = function(element){
+		this.nowFocus=element;
+		this.changeInfo(element,'hide');
+		element.style.color='black';
+	}
+
+	this.onBlur=function(element){
+		this.changeInfo(element,'show');
+		element.style.color='lightgray';
+	}
+
+	this.changeInfo=function(element,mode){
+		if (mode == 'show') {
+			switch(element){
+				case this.TodoList:
+					element.value=todoList.inputInfo;
+					break;
+			}
+		}else{
+			this.clear(element);
+		}
+	}
 }
 //=================================================
 //  全局变量，频繁使用的HTML元素
-input_TDL=document.querySelector("#AddInput_TDL");
+
+
+
 
 //=================================================
-//  初始化页面，工具，显示
-storage = window.localStorage;
-showTDL();
-changeInputInfo('show');
-
-//=================================================
-//  Flag部分，实现一些需要标记状态的逻辑
-openFlag=false;
-menuAreaFlag=true;
 
 //=================================================
 //  全局通用函数
-function clearInput(input) {  //清空输入框中当前文本
-    input.value = "";
-}
 
-function InputError(input) {  //输入错误时输入框动画
-    input.className += ' inputError';
-    setTimeout(function(){
-        input.className = '';
-    }, 500);
-}
+
 
 document.onclick=function(){  //点击监听，点击后隐藏OpenFlag的页面
 	while(openFlag.length>0){
@@ -183,11 +242,8 @@ document.onclick=function(){  //点击监听，点击后隐藏OpenFlag的页面
 
 addEventListener("keyup", function (event) {  //键盘Enter监听，捕获后触发对应效果
     if (event.keyCode==13) {
-        if (inputFlag == document.querySelector('#SearchInput')) {
-            onSearchClick();
-        } else 
-		if (inputFlag == input_TDL){
-            onAddClick();
+		if (input.nowFocus == input.TodoList){
+           todoList.onAddClick();
         }
     }
 });
@@ -212,29 +268,10 @@ addEventListener("keyup", function (event) {  //键盘Enter监听，捕获后触
 
 //=======================
 //  TodoList Part
-function showTDL() {  //加载显示TodoList的项目
-    var list = loadTDL();
-    var temp = "";
-    for (var i = 0; i < list.length; i++) {
-        temp += "<li>" + "<div class='checkBox_TDL'>" + "<input type='checkbox' id='" + i + "' value='" + i + "'>" + "</div>" + list[i].TDL + "</li>";
-    }
-    document.getElementById("list_TD").innerHTML = temp;
-}
 
 
 
-function addTDL() {  //添加新的TodoList项目
-    var list = loadTDL();
-    var addText;
-    addText = input_TDL.value;
-    //输入检查并存储
-    if (addText.length == 0 || addText.length >= 35 || !addText) {
-        InputError(input_TDL);
-    } else {
-        list[list.length] = {TDL: addText};
-        saveTDL(list);
-    }
-}
+
 
 function deleteTDL(select) {  //删除指定的TodoList项目
     var list = loadTDL();
@@ -243,40 +280,9 @@ function deleteTDL(select) {  //删除指定的TodoList项目
 }
 
 
-function onAddClick() {
-    addTDL();
-    showTDL();
-    clearInput(input_TDL);
-}
 
-function onClearClick() {
-    clearTDL();
-    showTDL();
-}
 
-function onEditClick(){
-	
-}
 
-function onFinishClick(){
-	
-}
-
-function onInputFocus(){
-	inputFlag =input_TDL;
-	changeInputInfo('hide');
-	input_TDL.style.color='black';
-}
-
-function onInputBlur(){
-	changeInputInfo('show');
-	input_TDL.style.color='lightgray'
-}
-
-function changeInputInfo(mode){
-	if (mode == 'show') input_TDL.value="   请在这里输入您要添加的事项…";
-	if (mode == 'hide') clearInput(input_TDL);
-}
 //=======================
 //  Search Part
 function createGetURL() {  //处理搜索内容并生成Get请求

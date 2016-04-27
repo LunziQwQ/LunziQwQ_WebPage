@@ -8,11 +8,11 @@
 </head>
 <body>
 	<div id = "background"></div>
-	<div id="Level" onclick="onLevelClick()">
+	<div id="Level" onclick="myInfo.show()">
    		<p><h3>Lunzi</h3></p>
      	<p><h4>lv. <b id="lv"></b></h4></p>
     </div>
-    <div id="switchBtn" onclick="onSwitchClick()">
+    <div id="switchBtn" onclick="rightMenu.switchMode()">
     	<h4>QwQ</h4>
     </div>
     
@@ -32,25 +32,25 @@
 	</div>		
 	
 	<div id="MenuArea">
-		<div class="Menu-top Menu-child" onmouseenter="showMore(this)" onmouseleave="hideMore(this)">
+		<div class="Menu-top Menu-child" onmouseenter="rightMenu.showMore(this)" onmouseleave="rightMenu.hideMore(this)">
 			<div class="Menu-text">
 				<h1>首页</h1>
 				<p>Lunzi的博客首页</p>
 			</div>
 		</div>		
-		<div class="Menu-left Menu-child" onmouseenter="showMore(this)" onmouseleave="hideMore(this)">
+		<div class="Menu-left Menu-child" onmouseenter="rightMenu.showMore(this)" onmouseleave="rightMenu.hideMore(this)">
 			<div class="Menu-text">
 				<h1>文章</h1>
 				<p>各种文章，技术文章，心情w</p>
 			</div>
 		</div>
-		<div class="Menu-right Menu-child" onmouseenter="showMore(this)" onmouseleave="hideMore(this)">
+		<div class="Menu-right Menu-child" onmouseenter="rightMenu.showMore(this)" onmouseleave="rightMenu.hideMore(this)">
 			<div class="Menu-text">
 				<h1>推荐</h1>
 				<p>个人喜欢的音乐，网站，文章</p>
 			</div>
 		</div>
-		<div class="Menu-bottom Menu-child" onmouseenter="showMore(this)" onmouseleave="hideMore(this)">
+		<div class="Menu-bottom Menu-child" onmouseenter="rightMenu.showMore(this)" onmouseleave="rightMenu.hideMore(this)">
 			<div class="Menu-text">
 				<h1>关于我</h1>
 				<p>About Me</p>
@@ -62,12 +62,12 @@
 		<div id="TodoList">
 			<div id="TodoListTitle-bg"><h5>TodoList</h5></div>
 			<div id = "EditArea_TDL">
-					<input id="AddInput_TDL" type="text" onfocus="onInputFocus()" onblur="onInputBlur()">
-					<div class="TDL_Btn" onclick="onEditClick()">Edit</div>
+					<input id="AddInput_TDL" type="text" onfocus="inputText.onFocus(this)" onblur="inputText.onBlur(this)">
+					<div class="TDL_Btn" onclick="todoList.onEditClick()">Edit</div>
 					<div id="TDL_Btn_Area">
 
-						<div id="TDL_Btn_Clear" class="TDL_Btn" onclick="onClearClick()">Clear</div>
-						<div id="TDL_Btn_Finish" class="TDL_Btn" onclick="onFinishClick()">Finish</div>
+						<div id="TDL_Btn_Clear" class="TDL_Btn" onclick="todoList.onClearClick()">Clear</div>
+						<div id="TDL_Btn_Finish" class="TDL_Btn" onclick="todoList.onFinishClick() console.log('dock')">Finish</div>
 					</div>
 
 			</div>

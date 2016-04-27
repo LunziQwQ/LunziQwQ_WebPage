@@ -1,213 +1,231 @@
 //=================================================
-//  全局变量，频繁使用的HTML元素
-myInfo=document.querySelector("#MyInfo");
-menuArea=document.querySelector("#MenuArea");
-todoList=document.querySelector("#TodoListArea");
-input_TDL=document.querySelector("#AddInput_TDL");
-pullDownMenu=document.querySelector("#TDL_Btn_Area");
-
+//  对象实例化
+rightMenu = new RightMenu();
+animation = new Animation();
+myInfo = new MyInfo();
+todoList = new TodoList();
+inputText = new Input();
 //=================================================
 //  初始化页面，工具，显示
 storage = window.localStorage;
-ShowMyBirthday();
-showTDL();
-changeInputInfo('show');
-
+openFlag = new Array();
+myInfo.showAge();
+todoList.show();
+inputText.changeInfo(inputText.TodoList,'show');
 //=================================================
-//  Flag部分，实现一些需要标记状态的逻辑
-openFlag=false;
-menuAreaFlag=true;
-
-//=================================================
-//  全局通用函数
-function clearInput(input) {  //清空输入框中当前文本
-    input.value = "";
-}
-
-function InputError(input) {  //输入错误时输入框动画
-    input.className += ' inputError';
-    setTimeout(function(){
-        input.className = '';
-    }, 500);
-}
-
-document.onclick=function(){  //点击监听，点击后隐藏OpenFlag的页面
-	if(openFlag){
-		if(openFlag==myInfo) ActionAnimation('hide',myInfo);		
-		openFlag=false;
+//  全局事件监听
+document.onclick=function(){  /*点击监听，点击页面时隐藏现已打开（openFlag）的页面*/
+	while(openFlag.length>0){
+		openFlag.pop().close();
 	}
 }
-
-addEventListener("keyup", function (event) {  //键盘Enter监听，捕获后触发对应效果
+addEventListener("keyup", function (event) {  /*键盘Enter监听，捕获后触发对应效果*/
     if (event.keyCode==13) {
-        if (inputFlag == document.querySelector('#SearchInput')) {
-            onSearchClick();
-        } else 
-		if (inputFlag == input_TDL){
-            onAddClick();
+		if (inputText.nowFocus == inputText.TodoList){
+           todoList.onAddClick();
         }
     }
 });
-
 //=================================================
-//  页面动画部分
-function ActionAnimation(mode,element){  //触发页面动画，传递动画类型和触发元素
-	if(mode=='show') AnimationShow(element);
-	if(mode=='hide') AnimationHide(element);
-}
-
-//=======================
-//  各种类型动画，传递触发元素
-function AnimationShow(element){  //缩放显示
-	element.className+=' showTheBlock'
-	setTimeout(function(){
-		element.style.transform='scale(1)'
-		element.className='';
-	},290)
-}
-function AnimationHide(element){  //缩放隐藏
-	element.className+=' hideTheBlock'
-	setTimeout(function(){
-		element.style.transform='scale(0)'
-		element.className='';
-	},290)
-}
-
-//=================================================
-//  左上角Lv区域
-function ShowMyBirthday(){  //计算年龄并显示
-    var date = new Date();
-    var nowYear = date.getFullYear();
-    var myAge = nowYear - 1997;
-    var nowMonth = date.getMonth();
-    if (nowMonth<9) myAge -= 1;
-    document.querySelector("#lv").innerHTML = myAge;
-}
-
-function onLevelClick(){  //点击lv部分显示个人信息
-	ActionAnimation('show',myInfo);
-	openFlag=myInfo;      //传递当前已达开的页面，点击其他区域时会捕获
-	(event||window.event).cancelBubble=true;  //阻止事件冒泡
-}
-
-//=================================================
-//  右上角切换模块按钮
-function onSwitchClick(){
-	if(menuAreaFlag){
-		ActionAnimation('hide',menuArea);
-		setTimeout("ActionAnimation('show', todoList)", 300);
-		menuAreaFlag=false;  //传递当前模块
-	}else{
-		ActionAnimation('hide', todoList);
-		setTimeout("ActionAnimation('show',menuArea)", 300);
-		menuAreaFlag=true;   //传递当前模块
+//  页面动画类
+function Animation(){
+	this.scaleShow=function(element,time){
+		element.className+=' showTheBlock'
+		element.style.animationDuration=time+'ms';
+		setTimeout(function(){
+			element.style.transform='scale(1)';
+			element.className='';
+		},time-10);
 	}
-	(event||window.event).cancelBubble=true;  //阻止事件冒泡
+	this.scaleHide=function(element,time){
+		element.className+=' hideTheBlock'
+		element.style.animationDuration=time+'ms';
+		setTimeout(function(){
+			element.style.transform='scale(0)'
+			element.className='';
+		},time-10);
+	}
+	this.opacityShow=function(element,time){
+		element.className+=' showMore';
+//		element.style.animationDuration = time + 'ms';
+		setTimeout(function(){
+			element.style.opacity='1'	
+			element.classname='';
+		},time-10);
+	}
+	this.opacityHide=function(element,time){
+		element.className+=' hideMore';
+//		element.style.animationDuration = time + 'ms';
+		setTimeout(function(){
+			element.style.opacity='0';
+			element.classname='';
+		},time-10);
+	}
+	this.pullDownMenu=function(element,time){
+		element.classname += ' pullDownMenu';
+		element.style.animationDuration = time + 'ms';
+		setTimeout(function(){
+			element.style.top = '0';
+			element.className = '';
+		},time-10)
+	}
+	this.pullUpMenu=function(element,time){
+		element.classname += ' pullUpMenu';
+//		element.style.animationDuration = time + 'ms';
+		setTimeout(function(){
+			element.style.top = '-100';
+			element.className = '';
+		},time-10)
+	}
+	this.inputError=function(element){
+	    element.className += ' inputError';
+	    setTimeout(function(){
+	        element.className = '';
+	    }, 500);
+	}
+}
+//=================================================
+//  输入框类
+function Input(){
+	this.TodoList = document.querySelector("#AddInput_TDL");
+	this.nowFocus = '';
+
+	this.clear=function(element){
+		element.value='';
+	}
+	this.errorReport=function(element){
+		animation.inputError(element);
+	}
+	this.onFocus = function(element){
+		this.nowFocus=element;
+		this.changeInfo(element,'hide');
+		element.style.color='black';
+	}
+	this.onBlur=function(element){
+		this.changeInfo(element,'show');
+		element.style.color='lightgray';
+	}
+	this.changeInfo=function(element,mode){
+		if (mode == 'show') {
+			switch(element){
+				case this.TodoList:
+					element.value=todoList.inputInfo;
+					break;
+			}
+		}else{
+			this.clear(element);
+		}
+	}
+}
+//=================================================
+//  左上角个人信息类
+function MyInfo(){
+	this.element=document.querySelector("#MyInfo");
+	
+	this.showAge=function(){
+		var date = new Date();
+    	var nowYear = date.getFullYear();
+    	var myAge = nowYear - 1997;
+    	var nowMonth = date.getMonth();
+    	if (nowMonth<9) myAge -= 1;
+    	document.querySelector("#lv").innerHTML = myAge;
+	}
+	this.show=function(){
+		animation.scaleShow(myInfo.element,300)
+		openFlag.push(myInfo);      //传递当前已达开的页面，点击其他区域时会捕获
+		(event||window.event).cancelBubble=true;  //阻止事件冒泡
+	}
+	this.close=function(){
+		animation.scaleHide(myInfo.element,300)
+	}
 }
 
 //=================================================
-//  右侧四方菜单功能区域
+//  右侧四方菜单区域
 
 //=======================
-//  Menu Part
-function showMore(element){  //鼠标焦点在菜单上时显示详细
-	var more = element.querySelector('p');
-	more.className+=' showMore';
-	setTimeout(function(){
-		more.style.opacity='1'	
-		more.classname='';
-	},290)
-}
+//  Menu Class（包含右上角switch按钮）
+function RightMenu(){
+	this.element=document.querySelector("#MenuArea");
+	this.nowPart=true;
 
-function hideMore(element){  //鼠标焦点离开菜单上时隐藏详细
-	var more=element.querySelector('p');
-	more.className+=' hideMore';
-	setTimeout(function(){
-		more.style.opacity='0';
-		more.className='';
-	},290)
+	this.showMore=function(element){
+		var moreNote=element.querySelector('p');
+		animation.opacityShow(moreNote,300);
+	}
+	this.hideMore=function(element){
+		var moreNote=element.querySelector('p');
+		animation.opacityHide(moreNote,300);
+	}
+	this.switchMode=function(){
+		if(this.nowPart){
+			animation.scaleHide(rightMenu.element,300)
+			setTimeout("animation.scaleShow(todoList.element,300)", 300);
+			this.nowPart=false;  //传递当前模块
+		}else{
+			animation.scaleHide(todoList.element,300)
+			setTimeout("animation.scaleShow(rightMenu.element,300)", 300);
+			this.nowPart=true;   //传递当前模块
+		}
+		(event||window.event).cancelBubble=true;  //阻止事件冒泡
+	}
 }
-
 //=======================
-//  TodoList Part
-function showTDL() {  //加载显示TodoList的项目
-    var list = loadTDL();
-    var temp = "";
-    for (var i = 0; i < list.length; i++) {
-        temp += "<li>" + "<div class='checkBox_TDL'>" + "<input type='checkbox' id='" + i + "' value='" + i + "'>" + "</div>" + list[i].TDL + "</li>";
-    }
-    document.getElementById("list_TD").innerHTML = temp;
+//  TodoList Class
+function TodoList(){
+	this.element=document.querySelector("#TodoListArea");
+	this.inputInfo="   请在这里输入您要添加的事项…";
+
+	this.pullDownMenu=document.querySelector("#TDL_Btn_Area");
+	this.pullDownMenu.close=function(){
+		animation.pullUpMenu(this.pullDownMenu,200)
+	}
+	this.load=function(){
+   		return JSON.parse(storage.TDL || '[]');
+	}
+	this.save=function(Text){
+    	storage.TDL = JSON.stringify(Text);
+	}
+	this.clear = function(){
+		storage.TDL='';
+	}
+	this.add = function(){
+	    var list = this.load();
+	    var addText = inputText.TodoList.value;
+	    //输入检查并存储
+	    if (addText.length == 0 || addText.length >= 35 || !addText) {
+	        inputText.errorReport(inputText.TodoList);
+	    } else {
+	        list[list.length] = {TDL: addText};
+	        this.save(list);
+	    }
+	}
+	this.show = function(){
+	    var list = this.load();
+	    var temp = "";
+	    for (var i = 0; i < list.length; i++) {
+	        temp += "<li>" + "<div class='checkBox_TDL'>" + "<input type='checkbox' id='" + i + "' value='" + i + "'>" + "</div>" + list[i].TDL + "</li>";
+	    }
+	    document.querySelector("#list_TD").innerHTML = temp;
+	}
+	this.onEditClick = function(){
+		animation.pullDownMenu(this.pullDownMenu,200);
+		openFlag.push(this.pullDownMenu);
+	}
+	this.onAddClick = function(){
+	    this.add();
+	    this.show();
+	    inputText.clear(inputText.TodoList);
+	}
+	this.onClearClick = function(){
+	    this.clear();
+	    this.show();
+	}
+	this.onFinishClick = function(){
+		
+	}
 }
 
-function saveTDL(nowText) {  //将当前的TodoList存储进LocalStorage
-    storage.TDL = JSON.stringify(nowText);
-}
-
-function loadTDL() {  //读取LocalStorage中存储的TodoList项目
-    return JSON.parse(storage.TDL || '[]');
-}
-
-function addTDL() {  //添加新的TodoList项目
-    var list = loadTDL();
-    var addText;
-    addText = input_TDL.value;
-    //输入检查并存储
-    if (addText.length == 0 || addText.length >= 35 || !addText) {
-        InputError(input_TDL);
-    } else {
-        list[list.length] = {TDL: addText};
-        saveTDL(list);
-    }
-}
-
-function deleteTDL(select) {  //删除指定的TodoList项目
-    var list = loadTDL();
-    list.splice(select - 1, 1);
-    saveTDL(list);
-}
-
-function clearTDL() {  //清空TodoList
-    storage.TDL = '';
-}
-
-function onAddClick() {
-    addTDL();
-    showTDL();
-    clearInput(input_TDL);
-}
-
-function onClearClick() {
-    clearTDL();
-    showTDL();
-}
-
-function onEditClick(){
-	pullDownMenu.className+=' pullDownMenu'
-	setTimeout(function(){
-		pullDownMenu.style.top='0';
-		pullDownMenu.className='';
-	},190)
-}
-
-function onFinishClick(){
-	
-}
-
-function onInputFocus(){
-	inputFlag =input_TDL;
-	changeInputInfo('hide');
-	input_TDL.style.color='black';
-}
-
-function onInputBlur(){
-	changeInputInfo('show');
-	input_TDL.style.color='lightgray'
-}
-
-function changeInputInfo(mode){
-	if (mode == 'show') input_TDL.value="   请在这里输入您要添加的事项…";
-	if (mode == 'hide') clearInput(input_TDL);
-}
 //=======================
 //  Search Part
 function createGetURL() {  //处理搜索内容并生成Get请求
