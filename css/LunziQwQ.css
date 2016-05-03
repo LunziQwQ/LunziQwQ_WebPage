@@ -1,6 +1,5 @@
 body {
 	font-family: "microsoft yahei";
-	height: 100%;
 }
 h1{
 	font-size:50px;
@@ -156,10 +155,10 @@ p{
 	top: 20%;
 }
 .Menu-child{	/*子菜单通用样式*/
+	position: relative;
 	display: block;
 	background: #3FFCF6;
 	opacity: 0.8;
-	position: relative;
 	transform: rotate(45deg);
 	width:233px;
 	height:233px;
@@ -182,7 +181,7 @@ p{
 .Menu-top{    top: 0;		left: 0;	 }
 .Menu-left{   top:-50px;    left: -187px;}
 .Menu-right{  top: -285px;  left: 187px; }
-.Menu-bottom{ top: -335px;	left: 0;	 }
+.Menu-bottom{ top: -335px;	left: 0;	}
 
 /*  底部菜单区域      *******************************************/
 #footerMenu{	/*底部菜单定位*/
@@ -361,4 +360,16 @@ p{
 	height: 40px;
 	font-size: 23px;
 	border-radius: 5px;
+}
+/*  Timer部分      *******************************************/
+#Timer{
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	text-align: center;
+	background: black;
+	opacity: 0.85;
+}
+#Number{
+	font-size: 100px;
 }

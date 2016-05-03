@@ -142,7 +142,6 @@ function MyInfo(){
 		animation.scaleHide(myInfo.element)
 	}
 }
-
 //=================================================
 //  右侧四方菜单区域
 
@@ -238,7 +237,8 @@ function TodoList(){
 		this.show();
 	}
 }
-
+//=================================================
+//  底部菜单区域
 //=======================
 //  Search Class
 function Search(){
@@ -274,4 +274,13 @@ function Search(){
 	this.close = function(){
 		animation.scaleHide(this.element)
 	}
+}
+//=================================================
+//  Timer Part
+function Timer{
+	this.element = document.querySelector("#Timer");
+	
+	this.birthday = "{year:1997,month:9,day:22}"
+	
+	
 }
