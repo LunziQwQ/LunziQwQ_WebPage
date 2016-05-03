@@ -83,11 +83,10 @@
 	<div id ='footerMenu'>
 		<div id="footerMenu-bg"></div>
 		<div id="footerMenu01" class="footerMenuChild">
-			<h5>Search</h5>
+			<h5 onclick="search.onSearchClick(event)">Search</h5>
 			<div id="Search">
-				<button id="SEOButton" onclick="search.onSearchClick()">Search</button>
-					<input id="SearchInput" type="text" onfocus= "inputText.onFocus(this)" onblur="inputText.onBlur(this)">
-					<select name="SEO" id="SEOSelect">
+				<input id="SearchInput" type="text" onfocus= "inputText.onFocus(this)" onblur="inputText.onBlur(this)">
+				<select name="SEO" id="SEOSelect">
 					<option value="Bing">Bing</option>
 					<option value="Google">Google</option>
 					<option value="Github">Github</option>

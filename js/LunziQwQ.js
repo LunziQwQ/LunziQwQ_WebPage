@@ -17,6 +17,7 @@ inputText.changeInfo(inputText.Search,'show');
 //=================================================
 //  全局事件监听
 document.onclick=function(){  /*点击监听，点击页面时隐藏现已打开（openFlag）的页面*/
+	if (event.target == document.querySelector("#background"))
 	while(openFlag.length>0){
 		openFlag.pop().close();
 	}
@@ -24,10 +25,10 @@ document.onclick=function(){  /*点击监听，点击页面时隐藏现已打开
 addEventListener("keyup", function (event) {  /*键盘Enter监听，捕获后触发对应效果*/
     if (event.keyCode==13) {
 		if (inputText.nowFocus == inputText.TodoList){
-           todoList.onAddClick();
+           todoList.doAdd();
         }
 		if (inputText.nowFocus == inputText.Search){
-           search.onSearchClick();
+           search.doSearch();
         }
     }
 });
@@ -199,7 +200,7 @@ function TodoList(){
 	    var list = this.load();
 	    var addText = inputText.TodoList.value;
 	    //输入检查并存储
-	    if (addText.length == 0 || addText.length >= 35 || !addText) {
+	    if (addText.length == 0 || addText.length >= 35 || !addText || addText == todoList.inputInfo) {
 	        inputText.errorReport(inputText.TodoList);
 	    } else {
 	        list[list.length] = {TDL: addText};
@@ -219,7 +220,7 @@ function TodoList(){
 		openFlag.push(todoList);
 		event.cancelBubble=true;  //阻止事件冒泡
 	}
-	this.onAddClick = function(){
+	this.doAdd = function(){
 	    this.add();
 	    this.show();
 	    inputText.clear(inputText.TodoList);
@@ -239,7 +240,7 @@ function TodoList(){
 }
 
 //=======================
-//  Search Part
+//  Search Class
 function Search(){
 	this.element = document.querySelector("#Search");
 	this.inputInfo = " 请在这里输入您要搜索的内容…"
@@ -254,15 +255,23 @@ function Search(){
 	    };
   		var select = document.querySelector("#SEOSelect");
 	    var select_value = select.options[select.selectedIndex].value;
-	    if (search_text.length == 0) return false;
+	    if (search_text.length == 0 || search_text == search.inputInfo) return false;
 	    return SEOList[select_value] + search_text;
     }
     
-	this.onSearchClick = function(){
+	this.doSearch = function(){
 		var search_text = inputText.Search.value;
 		var URL = createGet(search_text);
 		if (!URL) inputText.errorReport(inputText.Search);
 		else window.open(URL);
 		inputText.clear(inputText.Search);
+	}
+	this.onSearchClick = function(){
+		animation.scaleShow(this.element);
+		openFlag.push(search);
+		event.cancelBubble=true;  //阻止事件冒泡
+	}
+	this.close = function(){
+		animation.scaleHide(this.element)
 	}
 }

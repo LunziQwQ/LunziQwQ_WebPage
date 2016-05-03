@@ -331,22 +331,34 @@ p{
 
 /*  搜索框部分      *******************************************/
 #Search {
-	top: -250px;
 	position: relative;
+	top: -230px;
     display: inline-block;
     border-radius: 10px;
     text-align: center;
     min-width: 300%;
     padding: 30px;
-    float: left;
+    transform: scale(0);
     background-color: rgba(36,147,173,.5);
 }
 #SearchInput{
+	position: relative;
 	color: lightgray;
 	font-size: 25px;
 	width:60%;
 	height: 40px;
+	margin: 10px;
 }
 #SEOButton{
 	padding: 1px;
+	height: 40px;
+	width: 90px;
+	font-size: 23px;
+	border-radius: 5px;
+	background: white;
+}
+#SEOSelect{
+	height: 40px;
+	font-size: 23px;
+	border-radius: 5px;
 }
