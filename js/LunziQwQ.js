@@ -6,6 +6,10 @@ myInfo = new MyInfo();
 todoList = new TodoList();
 search = new Search();
 inputText = new Input();
+timer = new Timer();
+
+timer.setBirthday();
+timer.showNumber();
 //=================================================
 //  初始化页面，工具，显示
 storage = window.localStorage;
@@ -279,8 +283,38 @@ function Search(){
 //  Timer Part
 function Timer(){
 	this.element = document.querySelector("#Timer");
+	this.status = true;
 	
-	this.birthday = {year:1997,month:9,day:22}；
+	this.birthday = {year:1997,month:9,day:22,set:false};
+	var numberValue = 0;
+	var birthDate = new Date();
+	var self = this;
 	
-	
+	this.setBirthday = function(){
+		birthDate.setFullYear(this.birthday.year);
+		birthDate.setMonth(this.birthday.month - 1);
+		birthDate.setDate(this.birthday.day);
+		birthDate.setHours(0);
+		birthDate.setMinutes(0);
+		birthDate.setSeconds(0);
+		birthDate.setMilliseconds(0);
+		this.birthday.set = true;
+	}
+	this.getNumberValue = function(){
+		var nowDate = new Date();
+		numberValue = (nowDate.getTime() - birthDate.getTime()) / 31536000000;
+	}
+	this.showNumber = function(){
+		var numberElement = document.querySelector("#Number");
+		
+		int = setInterval(function(){
+			self.getNumberValue();
+			numberElement.innerHTML = numberValue.toFixed(10);
+			if(!self.status) 
+				self.stop(int);
+		},100);
+	}
+	this.stop = function(int){
+		clearInterval(int);
+	}
 }

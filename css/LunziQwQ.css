@@ -1,5 +1,6 @@
 body {
 	font-family: "microsoft yahei";
+	overflow: hidden;
 }
 h1{
 	font-size:50px;
@@ -363,13 +364,19 @@ p{
 }
 /*  Timer部分      *******************************************/
 #Timer{
+	/*display: none;*/
 	position: absolute;
 	height: 100%;
 	width: 100%;
-	text-align: center;
+	text-align:center;
 	background: black;
-	opacity: 0.85;
+	opacity: 0.9;
+	z-index: 100;
 }
 #Number{
-	font-size: 100px;
+	position: relative;
+	top: 45%;
+	margin-top: -100px;
+	font-size: 200px;
+	color: white;
 }
