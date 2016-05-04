@@ -277,10 +277,10 @@ function Search(){
 }
 //=================================================
 //  Timer Part
-function Timer{
+function Timer(){
 	this.element = document.querySelector("#Timer");
 	
-	this.birthday = "{year:1997,month:9,day:22}"
+	this.birthday = {year:1997,month:9,day:22}；
 	
 	
 }
