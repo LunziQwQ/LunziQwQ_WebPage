@@ -311,10 +311,7 @@ function Timer(){
 			self.getNumberValue();
 			numberElement.innerHTML = numberValue.toFixed(10);
 			if(!self.status) 
-				self.stop(int);
+				clearInterval(int);
 		},100);
-	}
-	this.stop = function(int){
-		clearInterval(int);
 	}
 }
