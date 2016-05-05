@@ -8,8 +8,7 @@ search = new Search();
 inputText = new Input();
 timer = new Timer();
 
-timer.setBirthday();
-timer.showNumber();
+
 //=================================================
 //  初始化页面，工具，显示
 storage = window.localStorage;
@@ -21,7 +20,7 @@ inputText.changeInfo(inputText.Search,'show');
 //=================================================
 //  全局事件监听
 document.onclick=function(){  /*点击监听，点击页面时隐藏现已打开（openFlag）的页面*/
-	if (event.target == document.querySelector("#background"))
+	if (event.target == document.querySelector("#background") || event.target == timer.element || event.target == document.querySelector("#MyPng"))
 	while(openFlag.length>0){
 		openFlag.pop().close();
 	}
@@ -80,6 +79,20 @@ function Animation(){
 			element.style.top = '-100px';
 			element.className = '';
 		},190)
+	}
+	this.pullDownPage = function(element){
+		element.className += ' pullDownPage';
+		setTimeout(function(){
+			element.style.height = '100%';
+			element.className = '';
+		},290);
+	}
+	this.pushUpPage = function(element){
+		element.className += ' pushUpPage';
+		setTimeout(function(){
+			element.style.height = '0';
+			element.className = '';
+		},290);
 	}
 	this.inputError=function(element){
 	    element.className += ' inputError';
@@ -310,8 +323,24 @@ function Timer(){
 		int = setInterval(function(){
 			self.getNumberValue();
 			numberElement.innerHTML = numberValue.toFixed(10);
-			if(!self.status) 
+			if(!self.status) {
 				clearInterval(int);
+				numberElement.innerHTML = '';
+			}
 		},100);
+	}
+	this.show = function(){
+		animation.pullDownPage(this.element);
+		openFlag.push(timer);
+	}
+	this.close = function(){
+		animation.pushUpPage(this.element);
+		self.status = false;
+	}
+	this.onTimerClick = function(){
+		self.status = true;
+		this.show();
+		this.setBirthday();
+		this.showNumber();
 	}
 }

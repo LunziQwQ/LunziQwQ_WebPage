@@ -43,6 +43,15 @@ p{
 	z-index: -10;
 }
 
+/*　　人物立绘部分　　*******************************************/
+#MyPng{
+	position: absolute;
+	bottom: 60px;
+	left: 10%;
+	height: 80%;
+	
+}
+
 /*　　左上角Level部分　　*******************************************/
 #Level {
 	position: absolute;
@@ -57,6 +66,7 @@ p{
 	top: 120px;
 	background: white;
 	transform: scale(0);
+	z-index: 10;
 }
 #InfoBackground {		/*头像图片*/
 	position: relative;
@@ -130,12 +140,8 @@ p{
 }
 
 /****　　TodoList菜单下拉　　****/
-.pullDownMenu{
-	animation: DownMenu 0.2s;
-}
-.pullUpMenu{
-	animation: UpMenu 0.2s;
-}
+.pullDownMenu{ animation: DownMenu 0.2s;}
+.pullUpMenu{ animation: UpMenu 0.2s;}
 
 @keyframes UpMenu{
 	0%{top: 0px;}
@@ -145,7 +151,18 @@ p{
 	0%{top: -100px;}
 	100%{top: 0px;}
 }
+/****　　Timer屏幕下拉　　****/
+.pullDownPage{ animation: pageDown 0.3s;}
+.pushUpPage{ animation: pageUp 0.3s;}
 
+@keyframes pageDown{
+	0%{height: 0;}
+	100%{height: 100%;}
+}
+@keyframes pageUp{
+	0%{height: 100%;}
+	100%{height: 0;}
+}
 /*　　页面右侧四方菜单区　　*******************************************/
 #MenuArea{	/*四方菜单区域定位*/
 	display: block;
@@ -364,9 +381,8 @@ p{
 }
 /*  Timer部分      *******************************************/
 #Timer{
-	/*display: none;*/
 	position: absolute;
-	height: 100%;
+	height: 0;
 	width: 100%;
 	text-align:center;
 	background: black;
