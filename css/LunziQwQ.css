@@ -54,7 +54,7 @@ p{
 
 /*　　左上角Level部分　　*******************************************/
 #Level {
-	position: absolute;
+	position: fixed;
 	padding: 0 10px 0 10px;
 	left: 10px;
 }
@@ -223,10 +223,14 @@ p{
 	position: absolute;
 	text-align: center;
 	margin-left: 30px;
-	bottom: 10px;
-	height: 40px;
+	bottom: -7px;
+	height: 60px;
 	width: 200px;
 	z-index: 10;
+}
+.footerMenuChild :hover{
+	border-bottom: solid white 5px;
+	background: rgba(255,255,255,0.2);
 }
 /*  各个子按钮位置　　*/
 #footerMenu01{left: 0%}

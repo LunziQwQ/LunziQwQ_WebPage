@@ -7,8 +7,6 @@ todoList = new TodoList();
 search = new Search();
 inputText = new Input();
 timer = new Timer();
-
-
 //=================================================
 //  初始化页面，工具，显示
 storage = window.localStorage;
