@@ -1,68 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>LunziQwQ</title>
-    <link rel="stylesheet" href="css/yahoo-base.css" />
-    <link rel="stylesheet" href="css/LunziQwQ.css">
-</head>
-<body>
-	<div id = "background"></div>
-	<div id="Level" onclick="myInfo.show(event);">
-   		<p><h3>Lunzi</h3></p>
-     	<p><h4>lv. <b id="lv"></b></h4></p>
-    </div>
-    <div id="switchBtn" onclick="rightMenu.switchMode()">
-    	<h4>QwQ</h4>
-    </div>
-    
-	<div id="MyInfo">
-		<div id="InfoBackground">
-			<span class="MyInfo-onImg">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>LunziQwQ</title>
+		<link rel="stylesheet" href="css/yahoo-base.css" />
+		<link rel="stylesheet" href="css/LunziQwQ.css">
+	</head>
+
+	<body>
+		<div id="background"></div>
+		<div id="Level" onclick="myInfo.show(event);">
+			<p>
+				<h3>Lunzi</h3></p>
+			<p>
+				<h4>lv. <b id="lv"></b></h4></p>
+		</div>
+		<div id="switchBtn" onclick="rightMenu.switchMode()">
+			<h4>QwQ</h4>
+		</div>
+
+		<div id="MyInfo">
+			<div id="InfoBackground">
+				<span class="MyInfo-onImg">
 				<p class="MyInfo-onImg-name">姜子麒</p>
 				<p class="MyInfo-onImg-motto">私はここでただ桜の季節を、</p>
 			</span>
-		</div>
-		
-		<div id="InfoUnderImg">
-			<p>地址： 广东中山</p>
-			<p>电子科技大学中山学院</p>
-			<p>软件工程15级</p>
-		</div>
-	</div>		
-	
-	<div id="MenuArea">
-		<div class="Menu-top Menu-child"
-		 onmouseenter="rightMenu.showMore(this)" onmouseleave="rightMenu.hideMore(this)">
-			<div class="Menu-text">
-				<h1>首页</h1>
-				<p>Lunzi的博客首页</p>
 			</div>
-		</div>		
-		<div class="Menu-left Menu-child" onmouseenter="rightMenu.showMore(this)" onmouseleave="rightMenu.hideMore(this)">
-			<div class="Menu-text">
-				<h1>文章</h1>
-				<p>各种文章，技术文章，心情w</p>
-			</div>
-		</div>
-		<div class="Menu-right Menu-child" onmouseenter="rightMenu.showMore(this)" onmouseleave="rightMenu.hideMore(this)">
-			<div class="Menu-text">
-				<h1>推荐</h1>
-				<p>个人喜欢的音乐，网站，文章</p>
-			</div>
-		</div>
-		<div class="Menu-bottom Menu-child" onmouseenter="rightMenu.showMore(this)" onmouseleave="rightMenu.hideMore(this)">
-			<div class="Menu-text">
-				<h1>关于我</h1>
-				<p>喵喵喵喵喵</p>
-			</div>
-		</div>
-	</div>
 
-	<div id="TodoListArea">
-		<div id="TodoList">
-			<div id="TodoListTitle-bg"><h5>TodoList</h5></div>
-			<div id = "EditArea_TDL">
+			<div id="InfoUnderImg">
+				<p>地址： 广东中山</p>
+				<p>电子科技大学中山学院</p>
+				<p>软件工程15级</p>
+			</div>
+		</div>
+
+		<div id="MenuArea">
+			<div class="Menu-top Menu-child" onmouseenter="rightMenu.showMore(this)" onmouseleave="rightMenu.hideMore(this)">
+				<div class="Menu-text">
+					<h1>首页</h1>
+					<p>Lunzi的博客首页</p>
+				</div>
+			</div>
+			<div class="Menu-left Menu-child" onmouseenter="rightMenu.showMore(this)" onmouseleave="rightMenu.hideMore(this)">
+				<div class="Menu-text">
+					<h1>文章</h1>
+					<p>各种文章，技术文章，心情w</p>
+				</div>
+			</div>
+			<div class="Menu-right Menu-child" onmouseenter="rightMenu.showMore(this)" onmouseleave="rightMenu.hideMore(this)">
+				<div class="Menu-text">
+					<h1>推荐</h1>
+					<p>个人喜欢的音乐，网站，文章</p>
+				</div>
+			</div>
+			<div class="Menu-bottom Menu-child" onmouseenter="rightMenu.showMore(this)" onmouseleave="rightMenu.hideMore(this)">
+				<div class="Menu-text">
+					<h1>关于我</h1>
+					<p>喵喵喵喵喵</p>
+				</div>
+			</div>
+		</div>
+
+		<div id="TodoListArea">
+			<div id="TodoList">
+				<div id="TodoListTitle-bg">
+					<h5>TodoList</h5></div>
+				<div id="EditArea_TDL">
 					<input id="AddInput_TDL" type="text" onfocus="inputText.onFocus(this)" onblur="inputText.onBlur(this)">
 					<div class="TDL_Btn" onclick="todoList.onEditClick(event)">Edit</div>
 					<div id="TDL_Btn_Area">
@@ -71,66 +75,47 @@
 						<div id="TDL_Btn_Finish" class="TDL_Btn" onclick="todoList.onFinishClick()">Finish</div>
 					</div>
 
+				</div>
+				<ol id="list_TD">
+
+				</ol>
+
 			</div>
-			<ol id="list_TD">
 
-			</ol>
-			
 		</div>
 
-	</div>
-	
-	<img id="MyPng" src="img/20160425@1x.png"/>
-	<div id ='footerMenu'>
-		<div id="footerMenu-bg"></div>
-		<div id="footerMenu01" class="footerMenuChild">
-			<h5 onclick="search.onSearchClick(event)">Search</h5>
-			<div id="Search">
-				<input id="SearchInput" type="text" onfocus= "inputText.onFocus(this)" onblur="inputText.onBlur(this)">
-				<select name="SEO" id="SEOSelect">
-					<option value="Bing">Bing</option>
-					<option value="Google">Google</option>
-					<option value="Github">Github</option>
-					<option value="Taobao">Taobao</option>
-					<option value="Bilibili">Bilibili</option>
-				</select>
+		<img id="MyPng" src="img/20160425@1x.png" />
+		<div id='footerMenu'>
+			<div id="footerMenu-bg"></div>
+			<div id="footerMenu01" class="footerMenuChild">
+				<h5 onclick="search.onSearchClick(event)">Search</h5>
+				<div id="Search">
+					<input id="SearchInput" type="text" onfocus="inputText.onFocus(this)" onblur="inputText.onBlur(this)">
+					<select name="SEO" id="SEOSelect">
+						<option value="Bing">Bing</option>
+						<option value="Google">Google</option>
+						<option value="Github">Github</option>
+						<option value="Taobao">Taobao</option>
+						<option value="Bilibili">Bilibili</option>
+					</select>
+				</div>
+
 			</div>
-			
+			<div id="footerMenu02" class="footerMenuChild">
+				<h5 onclick="timer.onTimerClick()">Timing!</h5>
+			</div>
+			<div id="footerMenu03" class="footerMenuChild">
+
+			</div>
+			<div id="footerMenu04" class="footerMenuChild">
+
+			</div>
+
 		</div>
-		<div id="footerMenu02" class="footerMenuChild">
-			<h5 onclick="timer.onTimerClick()" >Timing!</h5>
+		<div id="Timer">
+			<div id="Number"></div>
 		</div>
-		<div id="footerMenu03" class="footerMenuChild">
-			
-			
-		</div>
-		<div id="footerMenu04" class="footerMenuChild">
-			
-			
-		</div>
-		<div id="footerMenu05" class="footerMenuChild">
-			
-			
-		</div>
-		
-		
-		
-	</div>
-
-
-	<div id="Timer">
-		<div id="Number"></div>
-	</div>
-	
-	
-
-
-
-
-
-		
-		
-<!--
+		<!--
 	下部初始蓝色，暂定按钮，搜索，搬运或实现何种工具，四级查询，课程表，等。。。  样式矩形结合梯形，hover上方加横条，色彩加深。
 	bottom botton :, search , Music ,siji cha xun , daily Tools，
 	登陆界面，逻辑，通用的通知样式
@@ -140,12 +125,7 @@
 	点击Timer时调用全屏API
 	使用年龄验证，用户名做密码
 -->
-    	
-    
+		<script src="js/LunziQwQ.js"></script>
+	</body>
 
-    
-    
-    
-    <script src="js/LunziQwQ.js"></script>
-</body>
 </html>

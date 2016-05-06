@@ -2,64 +2,78 @@ body {
 	font-family: "microsoft yahei";
 	overflow: hidden;
 }
-h1{
-	font-size:50px;
+
+h1 {
+	font-size: 50px;
 	font-style: inherit;
 }
-h2{
-	font-size:40px;
+
+h2 {
+	font-size: 40px;
 	font-style: inherit
 }
-h3{
-	font-size:60px;
+
+h3 {
+	font-size: 60px;
 	color: #55C3B5;
 	font-weight: 900;
 	text-shadow: 0px 1px 1px black;
 }
-h4{
-	font-size:40px;
+
+h4 {
+	font-size: 40px;
 	color: #55C3B5;
 	font-weight: 900;
 	text-shadow: 0px 1px 1px black;
 }
-h5{
-	font-size:40px;
+
+h5 {
+	font-size: 40px;
 	color: white;
 	font-weight: 600;
 }
-li{
+
+li {
 	font-size: 20px;
 }
-p{
+
+p {
 	margin: 10px;
 }
 
+
 /*　　整个页面的纹理背景　　*******************************************/
-#background{
-	background: url(../img/QQ图片20160412204030.png)	;
+
+#background {
+	background: url(../img/QQ图片20160412204030.png);
 	position: absolute;
 	width: 100%;
 	height: 100%;
 	z-index: -10;
 }
 
+
 /*　　人物立绘部分　　*******************************************/
-#MyPng{
+
+#MyPng {
 	position: absolute;
 	bottom: 60px;
 	left: 10%;
 	height: 80%;
-	
 }
 
+
 /*　　左上角Level部分　　*******************************************/
+
 #Level {
 	position: fixed;
 	padding: 0 10px 0 10px;
 	left: 10px;
 }
 
+
 /*　　点击level后弹出的MyInfo页面部分　　******************************/
+
 #MyInfo {
 	position: absolute;
 	left: 140px;
@@ -68,7 +82,9 @@ p{
 	transform: scale(0);
 	z-index: 10;
 }
-#InfoBackground {		/*头像图片*/
+
+#InfoBackground {
+	/*头像图片*/
 	position: relative;
 	top: -8px;
 	background: url(../img/Icon.jpg);
@@ -76,140 +92,257 @@ p{
 	width: 300px;
 	height: 300px;
 }
-#InfoUnderImg{		/*头像图片下面文字区域*/
+
+#InfoUnderImg {
+	/*头像图片下面文字区域*/
 	padding: 15px;
 	font-size: 20px;
 }
-.MyInfo-onImg {		/*头像图片上层文字部分*/
+
+.MyInfo-onImg {
+	/*头像图片上层文字部分*/
 	position: relative;
 	top: 220px;
 	left: 10px;
 }
-.MyInfo-onImg-name {	/*上层名字*/
+
+.MyInfo-onImg-name {
+	/*上层名字*/
 	font-size: 40px;
 	font-style: initial;
 	color: white;
 }
-.MyInfo-onImg-motto {	/*上层个性签名*/
+
+.MyInfo-onImg-motto {
+	/*上层个性签名*/
 	color: lightgray;
 	font-size: 15px;
 }
 
+
 /*　　动画效果，关键帧与对应类　　**************************************/
+
+
 /****　　大小缩放　　****/
-.showTheBlock{
+
+.showTheBlock {
 	animation: showBlock 0.3s;
 }
-.hideTheBlock{
+
+.hideTheBlock {
 	animation: hideBlock 0.3s;
 }
-@keyframes showBlock{
-	0%{transform:scale(0)}
-	100%{transform: scale(1);}
+
+@keyframes showBlock {
+	0% {
+		transform: scale(0)
+	}
+	100% {
+		transform: scale(1);
+	}
 }
-@keyframes hideBlock{
-	0%{transform: scale(1);}
-	100%{transform: scale(0);}
+
+@keyframes hideBlock {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(0);
+	}
 }
+
 
 /****　　淡入淡出　　****/
-.showMore{
+
+.showMore {
 	animation: fadeIn 0.3s;
 }
-.hideMore{
+
+.hideMore {
 	animation: fadeOut 0.3s;
 }
-@keyframes fadeIn{
-	0%{opacity:0;}
-	100%{opacity:1;}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
-@keyframes fadeOut{
-	0%{opacity: 1;}
-	100%{opacity:0;}
+
+@keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
 }
+
 
 /****　　输入框窗口抖动　　****/
+
 .inputError {
-    animation: inputErr 0.1s 5;
+	animation: inputErr 0.1s 5;
 }
+
 @keyframes inputErr {
-    0%  {left: 0px ;top:  0px;}
-    25% {left: 8px ;top: -3px;}
-    50% {left: 0px ;top:  0px;}
-    75% {left: -8px;top:  3px;}
+	0% {
+		left: 0px;
+		top: 0px;
+	}
+	25% {
+		left: 8px;
+		top: -3px;
+	}
+	50% {
+		left: 0px;
+		top: 0px;
+	}
+	75% {
+		left: -8px;
+		top: 3px;
+	}
 }
+
 
 /****　　TodoList菜单下拉　　****/
-.pullDownMenu{ animation: DownMenu 0.2s;}
-.pullUpMenu{ animation: UpMenu 0.2s;}
 
-@keyframes UpMenu{
-	0%{top: 0px;}
-	100%{top: -100px;}
+.pullDownMenu {
+	animation: DownMenu 0.2s;
 }
-@keyframes DownMenu{
-	0%{top: -100px;}
-	100%{top: 0px;}
+
+.pullUpMenu {
+	animation: UpMenu 0.2s;
 }
+
+@keyframes UpMenu {
+	0% {
+		top: 0px;
+	}
+	100% {
+		top: -100px;
+	}
+}
+
+@keyframes DownMenu {
+	0% {
+		top: -100px;
+	}
+	100% {
+		top: 0px;
+	}
+}
+
+
 /****　　Timer屏幕下拉　　****/
-.pullDownPage{ animation: pageDown 0.3s;}
-.pushUpPage{ animation: pageUp 0.3s;}
 
-@keyframes pageDown{
-	0%{height: 0;}
-	100%{height: 100%;}
+.pullDownPage {
+	animation: pageDown 0.3s;
 }
-@keyframes pageUp{
-	0%{height: 100%;}
-	100%{height: 0;}
+
+.pushUpPage {
+	animation: pageUp 0.3s;
 }
+
+@keyframes pageDown {
+	0% {
+		height: 0;
+	}
+	100% {
+		height: 100%;
+	}
+}
+
+@keyframes pageUp {
+	0% {
+		height: 100%;
+	}
+	100% {
+		height: 0;
+	}
+}
+
+
 /*　　页面右侧四方菜单区　　*******************************************/
-#MenuArea{	/*四方菜单区域定位*/
+
+#MenuArea {
+	/*四方菜单区域定位*/
 	display: block;
 	position: absolute;
 	height: 10px;
-	width:10px;
+	width: 10px;
 	left: 65%;
 	top: 20%;
 }
-.Menu-child{	/*子菜单通用样式*/
+
+.Menu-child {
+	/*子菜单通用样式*/
 	position: relative;
 	display: block;
 	background: #3FFCF6;
 	opacity: 0.8;
 	transform: rotate(45deg);
-	width:233px;
-	height:233px;
+	width: 233px;
+	height: 233px;
 	box-shadow: 2px 1px 1px;
 }
-.Menu-child p{
+
+.Menu-child p {
 	opacity: 0;
 }
-.Menu-text{		/*菜单文本通用样式*/
+
+.Menu-text {
+	/*菜单文本通用样式*/
 	position: relative;
 	transform: rotate(-45deg);
 	text-align: center;
 	left: 10px;
 	top: 83px;
 }
-.Menu-text p{
+
+.Menu-text p {
 	font-size: 16px;
 }
+
+
 /*　　四个菜单的各自定位　　*/
-.Menu-top{    top: 0;		left: 0;	 }
-.Menu-left{   top:-50px;    left: -187px;}
-.Menu-right{  top: -285px;  left: 187px; }
-.Menu-bottom{ top: -335px;	left: 0;	}
+
+.Menu-top {
+	top: 0;
+	left: 0;
+}
+
+.Menu-left {
+	top: -50px;
+	left: -187px;
+}
+
+.Menu-right {
+	top: -285px;
+	left: 187px;
+}
+
+.Menu-bottom {
+	top: -335px;
+	left: 0;
+}
+
 
 /*  底部菜单区域      *******************************************/
-#footerMenu{	/*底部菜单定位*/
+
+#footerMenu {
+	/*底部菜单定位*/
 	position: absolute;
 	bottom: 0px;
 	height: 60px;
 	width: 50%;
 	min-width: 960px;
 }
-#footerMenu-bg{  /*底部菜单背景*/
+
+#footerMenu-bg {
+	/*底部菜单背景*/
 	position: relative;
 	border-radius: 10px;
 	width: 100%;
@@ -217,9 +350,10 @@ p{
 	background: #E9604A;
 	box-shadow: 2px 1px 1px;
 	z-index: -10;
-	
 }
-.footerMenuChild{	/*菜单按钮通用类*/
+
+.footerMenuChild {
+	/*菜单按钮通用类*/
 	position: absolute;
 	text-align: center;
 	margin-left: 30px;
@@ -228,19 +362,39 @@ p{
 	width: 200px;
 	z-index: 10;
 }
-.footerMenuChild :hover{
+
+.footerMenuChild h5:hover {
 	border-bottom: solid white 5px;
-	background: rgba(255,255,255,0.2);
+	background: rgba(255, 255, 255, 0.2);
 }
+
+
 /*  各个子按钮位置　　*/
-#footerMenu01{left: 0%}
-#footerMenu02{left:20%}
-#footerMenu03{left:40%}
-#footerMenu04{left:60%}
-#footerMenu05{left:80%}
+
+#footerMenu01 {
+	left: 0%
+}
+
+#footerMenu02 {
+	left: 20%
+}
+
+#footerMenu03 {
+	left: 40%
+}
+
+#footerMenu04 {
+	left: 60%
+}
+
+#footerMenu05 {
+	left: 80%
+}
+
 
 /*  右上角切换按钮　　*******************************************/
-#switchBtn{
+
+#switchBtn {
 	position: relative;
 	top: 10px;
 	float: right;
@@ -249,17 +403,22 @@ p{
 	text-align: center;
 }
 
+
 /*  右侧TODOLIST区域　　*****************************************/
-#TodoListArea{	/*TodoList区域定位*/
+
+#TodoListArea {
+	/*TodoList区域定位*/
 	display: block;
 	position: absolute;
 	height: 10px;
-	width:10px;
+	width: 10px;
 	left: 77%;
 	top: 15%;
 	transform: scale(0);
 }
-#TodoListTitle-bg{  /*TodoList带背景的标题*/
+
+#TodoListTitle-bg {
+	/*TodoList带背景的标题*/
 	position: relative;
 	padding: 10px 20px 0 20px;
 	background: url(../img/TodoList_bg.png);
@@ -267,22 +426,28 @@ p{
 	height: 65px;
 	z-index: 10;
 }
-#AddInput_TDL {		/*TodoList输入框*/
+
+#AddInput_TDL {
+	/*TodoList输入框*/
 	position: relative;
-    width: 186px;
-    color: lightgray;
-    padding: 4px;
-    font-size: 18px;
+	width: 186px;
+	color: lightgray;
+	padding: 4px;
+	font-size: 18px;
 }
-#EditArea_TDL input{  /*TodoList Input 输入框*/
+
+#EditArea_TDL input {
+	/*TodoList Input 输入框*/
 	display: inline-block;
 	position: relative;
 	width: 85%;
 	height: 40px;
-	border:0.1px solid #ffffff;
+	border: 0.1px solid #ffffff;
 	font-size: 25px;
 }
-.TDL_Btn{ /*TodoList 输入框右侧的Edit按钮*/
+
+.TDL_Btn {
+	/*TodoList 输入框右侧的Edit按钮*/
 	position: relative;
 	display: inline-block;
 	float: right;
@@ -294,83 +459,105 @@ p{
 	background: lightgray;
 	z-index: 10;
 }
+
+.TDL_Btn:hover{
+	background: gray;	
+}
+
 #TDL_Btn_Area {
-    position: relative;
-    width: 680px;
-    height:0;
-    left: 86.53%;
-    top: -100px;
-    z-index: 1;
-}
-#TDL_Btn_Clear{
-	display: block;
-    float: none;
-}
-#TDL_Btn_Finish {
-    display: block;
-    float: none;
-}
-.checkBox_TDL{  /*TodoList文本左侧的复选框*/
 	position: relative;
-	float:left;
+	width: 680px;
+	height: 0;
+	left: 86.53%;
+	top: -100px;
+	z-index: 1;
+}
+
+#TDL_Btn_Clear {
+	display: block;
+	float: none;
+}
+
+#TDL_Btn_Finish {
+	display: block;
+	float: none;
+}
+
+.checkBox_TDL {
+	/*TodoList文本左侧的复选框*/
+	position: relative;
+	float: left;
 	top: -5px;
-	padding:0 10px 0 10px;
+	padding: 0 10px 0 10px;
 	margin-right: 10px;
 	text-align: center;
 	border-right: solid 1px lightgray;
 }
-.checkBox_TDL input{
-	height:30px;
+
+.checkBox_TDL input {
+	height: 30px;
 	width: 30px;
 	opacity: 0;
 }
-.checkBox_TDL input:checked{
+
+.checkBox_TDL input:checked {
 	opacity: 1;
 	background-color: coral;
 }
-#list_TD li { /*TodoList条目样式*/
-    background: white;
-    padding: 10px 10px 10px 0;
-    border-top: solid 1px lightgray;
-    border-bottom: solid 1px lightgray;
-}
-#list_TD{
-	position: relative;
-    min-height:100px;
-}
-#TodoList {			/*TodoList组件body*/
-	position: relative;
-	left:-490px;
-    width: 680px;
-    padding: 30px;
-    overflow: hidden;
-}
-#EditArea_TDL {		/*编辑区域，按钮，文本框*/
-    text-align: center;
-    background: white;
+
+#list_TD li {
+	/*TodoList条目样式*/
+	background: white;
+	padding: 10px 10px 10px 0;
+	border-top: solid 1px lightgray;
+	border-bottom: solid 1px lightgray;
 }
 
+#list_TD {
+	position: relative;
+	min-height: 100px;
+}
+
+#TodoList {
+	/*TodoList组件body*/
+	position: relative;
+	left: -490px;
+	width: 680px;
+	padding: 30px;
+	overflow: hidden;
+}
+
+#EditArea_TDL {
+	/*编辑区域，按钮，文本框*/
+	text-align: center;
+	background: white;
+}
+
+
 /*  搜索框部分      *******************************************/
+
 #Search {
 	position: relative;
 	top: -230px;
-    display: inline-block;
-    border-radius: 10px;
-    text-align: center;
-    min-width: 300%;
-    padding: 30px;
-    transform: scale(0);
-    background-color: rgba(36,147,173,.5);
+	display: inline-block;
+	border-radius: 10px;
+	text-align: center;
+	min-width: 300%;
+	padding: 30px;
+	transform: scale(0);
+	background-color: rgba(36, 147, 173, .5);
 }
-#SearchInput{
+
+#SearchInput {
 	position: relative;
 	color: lightgray;
 	font-size: 25px;
-	width:60%;
+	width: 60%;
 	height: 40px;
 	margin: 10px;
 }
-#SEOButton{
+
+#SEOButton {
 	padding: 1px;
 	height: 40px;
 	width: 90px;
@@ -378,22 +565,27 @@ p{
 	border-radius: 5px;
 	background: white;
 }
-#SEOSelect{
+
+#SEOSelect {
 	height: 40px;
 	font-size: 23px;
 	border-radius: 5px;
 }
+
+
 /*  Timer部分      *******************************************/
-#Timer{
+
+#Timer {
 	position: absolute;
 	height: 0;
 	width: 100%;
-	text-align:center;
+	text-align: center;
 	background: black;
 	opacity: 0.9;
 	z-index: 100;
 }
-#Number{
+
+#Number {
 	position: relative;
 	top: 45%;
 	margin-top: -100px;
