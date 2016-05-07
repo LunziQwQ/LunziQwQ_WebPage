@@ -57,5 +57,4 @@ function elementFromChar(legend, ch){
 	element.oringinChar = ch;
 	return element;
 }
-
-function World()
+function World(){};
