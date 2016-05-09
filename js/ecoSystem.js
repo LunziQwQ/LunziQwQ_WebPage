@@ -4,7 +4,7 @@ function Vector(x, y){
 }
 Vector.prototype.plus = function(other){
 	return new Vector(this.x+other.x,this.y+other.y);
-}//使用坐标偏移量实现动作
+};//使用坐标偏移量实现动作
 
 function Map(width,height){
 	this.space = new Array(width, height);
@@ -44,17 +44,17 @@ var directionNames = 'n s e w ne nw se sw'.split(' ');
 
 function movableCritter(){
 	this.direction = randomElement(directionNames);
-};
+}
 
 movableCritter.prototype.act = function(view){
 	if (view.look(this.direction) != ' ')
 	this.direction = view.find(' ') || 's';
 	return {type : 'move', direction: this.direction}
-}
+};
 
 function elementFromChar(legend, ch){
 	if (ch == ' ') var element = new legend[ch]();
 	element.oringinChar = ch;
 	return element;
 }
-function World(){};
+function World(){}
