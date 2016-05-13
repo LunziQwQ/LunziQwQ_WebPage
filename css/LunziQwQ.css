@@ -582,6 +582,7 @@ p {
     border: solid lightblue 2px;
     border-radius: 5%;
     background: #F1F1F1;
+    opacity: .9;
     overflow: hidden;
 }
 
@@ -597,15 +598,24 @@ p {
 }
 
 #NoticeTitleBtn {
-    margin: 20px;
-    padding:10px;
     float: right;
-    font-size:30px;
+    margin: 60px 20px 20px 20px;
+    padding: 10px;
+    font-size: 30px;
     background: lightblue;
     color: white;;
+
 }
 #NoticeTitleBtn:hover {
     background: white;
     color: lightblue;
     box-shadow: 0 5px 10px rgba(0,0,0,.12);
+}
+
+#NoticeText > input{
+    margin-left:10px;
+    width: 20%;
+}
+#NoticeInput{
+    color:lightgray;
 }

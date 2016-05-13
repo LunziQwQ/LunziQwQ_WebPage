@@ -8,6 +8,7 @@ var todoList = new TodoList();
 var search = new Search();
 var inputText = new Input();
 var timer = new Timer();
+var notice = new Notice();
 //=================================================
 //  初始化页面，工具，显示
 var storage = window.localStorage;
@@ -106,6 +107,7 @@ function Animation() {
 function Input() {
 	this.TodoList = document.querySelector("#AddInput_TDL");
 	this.Search = document.querySelector("#SearchInput");
+	this.notice = document.querySelector("#NoticeInput");
 	this.nowFocus = '';
 
 	this.clear = function(element) {
@@ -131,6 +133,10 @@ function Input() {
 					break;
 				case this.Search:
 					element.value = search.inputInfo;
+					break;
+				case this.notice:
+					element.value = notice.inputInfo;
+					break;
 			}
 		} else {
 			this.clear(element);
@@ -402,4 +408,38 @@ function Timer() {
 		setBirthday();
 		showNumber();
 	}
+}
+function Notice() {
+	this.element = document.querySelector("#Notice");
+	this.inputInfo = "请输入年龄，如 19960201...";
+	var container = document.querySelector("#NoticeText");
+	container.innerHTML = "";
+
+	this.sendNotice = function (text) {
+		container.innerHTML = text;
+	};
+	this.login = function () {
+		container.innerHTML = "请输入用户名w~：";
+		var input = document.createElement("input");
+		container.appendChild(input);
+		var btn = document.createElement("div");
+		btn.id = "NoticeTitleBtn";
+		btn.appendChild(document.createTextNode("Submit"));
+		container.appendChild(btn);
+	};
+	this.setBirthday = function () {
+		container.innerHTML = "请输入您的生日w~：";
+		var input = document.createElement("input");
+		input.id = "NoticeInput";
+		container.appendChild(input);
+		input = document.querySelector("#NoticeInput");
+		inputText.changeInfo(input, 'show');
+		input.onblur = function () {
+			inputText.onBlur(this);
+		};
+		input.onfocus = function () {
+			inputText.onFocus(this);
+		};
+	};
+
 }
