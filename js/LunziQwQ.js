@@ -423,16 +423,21 @@ function Timer() {
 		showNumber();
 	}
 }
+
 function Notice() {
 	this.element = document.querySelector("#Notice");
 	this.inputInfo = "请输入年龄，如 19960201...";
 
+	var self = this;
 	var container = document.querySelector("#NoticeText");
 	container.innerHTML = "";
 
 	var createBtn = function () {
 		var btn = document.createElement("div");
 		btn.id = "NoticeTitleBtn";
+		btn.onclick = function () {
+			self.onSubmitClick();
+		};
 		btn.appendChild(document.createTextNode("Submit"));
 		container.appendChild(btn);
 	};
@@ -449,16 +454,15 @@ function Notice() {
 		container.appendChild(input);
 	};
 
-	this.sendNotice = function (text) {
+	var sendNotice = function (text) {
 		container.innerHTML = text;
-		this.show();
+		show();
 	};
-	this.login = function () {
+	var login = function () {
 		container.innerHTML = "请输入用户名w~：";
 		createInput();
 		createBtn();
-		this.show();
-
+		show();
 	};
 	this.setBirthday = function () {
 		container.innerHTML = "请输入您的生日w~：";
@@ -467,11 +471,16 @@ function Notice() {
 		inputText.notice = input;
 		inputText.changeInfo(input,'show');
 		createBtn();
-		this.show();
+		show();
 	};
-
-	this.show = function () {
-		animation.pullDownNotice(this.element);
+	this.onSubmitClick = function () {
+		sendNotice("Coming soon");
+	};
+	this.onLoginClick = function () {
+		login();
+	};
+	var show = function () {
+		animation.pullDownNotice(self.element);
 		openFlag.push(notice);
 	};
 	this.close = function () {
