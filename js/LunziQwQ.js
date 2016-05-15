@@ -396,7 +396,7 @@ function Timer() {
             element.msRequestFullscreen();
         }
     };
-    var exitFullScreen = function(element) {
+    var exitFullScreen = function() {
         if (document.exitFullscreen) {
             document.exitFullscreen();
         } else if (document.mozCancelFullScreen) {
@@ -420,6 +420,7 @@ function Timer() {
 		self.status = true;
 		show();
 		setBirthday();
+		
 		showNumber();
 	}
 }
@@ -429,6 +430,7 @@ function Notice() {
 	this.inputInfo = "请输入年龄，如 19960201...";
 
 	var self = this;
+    var status = undefined;
 	var container = document.querySelector("#NoticeText");
 	container.innerHTML = "";
 
@@ -462,19 +464,25 @@ function Notice() {
 		container.innerHTML = "请输入用户名w~：";
 		createInput();
 		createBtn();
+        status = 'login';
 		show();
 	};
-	this.setBirthday = function () {
+	var setBirthday = function () {
 		container.innerHTML = "请输入您的生日w~：";
 		createInput();
 		var input = document.querySelector("#NoticeInput");
 		inputText.notice = input;
 		inputText.changeInfo(input,'show');
 		createBtn();
+        status = 'birthday';
 		show();
 	};
 	this.onSubmitClick = function () {
-		sendNotice("Coming soon");
+        if (status == 'login' || status == undefined){
+		    sendNotice("Coming soon");
+        }else if (status == 'birthday') {
+            
+        }
 	};
 	this.onLoginClick = function () {
 		login();
