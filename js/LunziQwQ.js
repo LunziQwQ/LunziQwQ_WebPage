@@ -95,12 +95,26 @@ function Animation() {
 			element.className = '';
 		}, 290);
 	};
-	this.inputError = function(element) {
+	this.inputError = function (element) {
 		element.className += ' inputError';
-		setTimeout(function() {
+		setTimeout(function () {
 			element.className = '';
 		}, 500);
-	}
+	};
+	this.pullDownNotice = function (element) {
+		element.className += ' pullDownNotice';
+		setTimeout(function () {
+			element.style.top = '0';
+			element.className = '';
+		}, 290);
+	};
+	this.pushUpNotice = function (element) {
+		element.className += ' pushUpNotice';
+		setTimeout(function () {
+			element.style.top = '-30%';
+			element.className = '';
+		},290);
+	};
 }
 //=================================================
 //  输入框类
@@ -412,34 +426,55 @@ function Timer() {
 function Notice() {
 	this.element = document.querySelector("#Notice");
 	this.inputInfo = "请输入年龄，如 19960201...";
+
 	var container = document.querySelector("#NoticeText");
 	container.innerHTML = "";
 
-	this.sendNotice = function (text) {
-		container.innerHTML = text;
-	};
-	this.login = function () {
-		container.innerHTML = "请输入用户名w~：";
-		var input = document.createElement("input");
-		container.appendChild(input);
+	var createBtn = function () {
 		var btn = document.createElement("div");
 		btn.id = "NoticeTitleBtn";
 		btn.appendChild(document.createTextNode("Submit"));
 		container.appendChild(btn);
 	};
-	this.setBirthday = function () {
-		container.innerHTML = "请输入您的生日w~：";
+
+	var createInput = function () {
 		var input = document.createElement("input");
 		input.id = "NoticeInput";
-		container.appendChild(input);
-		input = document.querySelector("#NoticeInput");
-		inputText.changeInfo(input, 'show');
 		input.onblur = function () {
 			inputText.onBlur(this);
 		};
 		input.onfocus = function () {
 			inputText.onFocus(this);
 		};
+		container.appendChild(input);
 	};
 
+	this.sendNotice = function (text) {
+		container.innerHTML = text;
+		this.show();
+	};
+	this.login = function () {
+		container.innerHTML = "请输入用户名w~：";
+		createInput();
+		createBtn();
+		this.show();
+
+	};
+	this.setBirthday = function () {
+		container.innerHTML = "请输入您的生日w~：";
+		createInput();
+		var input = document.querySelector("#NoticeInput");
+		inputText.notice = input;
+		inputText.changeInfo(input,'show');
+		createBtn();
+		this.show();
+	};
+
+	this.show = function () {
+		animation.pullDownNotice(this.element);
+		openFlag.push(notice);
+	};
+	this.close = function () {
+		animation.pushUpNotice(this.element);
+	};
 }
