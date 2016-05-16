@@ -34,6 +34,9 @@ addEventListener("keyup", function(event) { //键盘Enter监听，捕获后触�
 		if (inputText.nowFocus == inputText.Search) {
 			search.doSearch();
 		}
+        if (inputText.nowFocus == inputText.notice) {
+            notice.onSubmitClick();
+        }
 	}
 });
 //=================================================
@@ -136,7 +139,9 @@ function Input() {
 		element.style.color = 'black';
 	};
 	this.onBlur = function(element) {
-		this.changeInfo(element, 'show');
+		if (element.value == '') {
+			this.changeInfo(element, 'show');
+		}
 		element.style.color = 'lightgray';
 	};
 	this.changeInfo = function(element, mode) {
@@ -354,15 +359,23 @@ function Timer() {
 	var birthDate = new Date();
 	var self = this;
 
-	var setBirthday = function() {
-		birthDate.setFullYear(birthday.year);
-		birthDate.setMonth(birthday.month - 1);
-		birthDate.setDate(birthday.day);
-		birthDate.setHours(0);
-		birthDate.setMinutes(0);
-		birthDate.setSeconds(0);
-		birthDate.setMilliseconds(0);
-		birthday.set = true;
+	this.setBirthday = function(string) {
+		if (checkBirthdayInput(string)) {
+            birthDate.setFullYear(string.slice(0, 4));
+            birthDate.setMonth(string.slice(4, 6) - 1);
+            birthDate.setDate(string.slice(6, 8));
+            birthDate.setHours(0);
+            birthDate.setMinutes(0);
+            birthDate.setSeconds(0);
+            birthDate.setMilliseconds(0);
+			birthday.set = true;
+            return true;
+		}else return false;
+	};
+
+	var checkBirthdayInput = function (string) {
+        var patten = /^\d{4}(0[1-9]|1[0-2])(0[1-9]|[1-2]\d|3[0-1])$/;
+        return patten.test(string);
 	};
 
 	var showNumber = function() {
@@ -417,14 +430,21 @@ function Timer() {
 		self.status = false;
 	};
 	this.onTimerClick = function() {
-		self.status = true;
-		show();
-		setBirthday();
-		
-		showNumber();
+		if (!birthday.set) {
+			notice.sendNotice("请先设置您的生日~");
+			setTimeout(function () {
+				notice.setBirthday();
+			},1000);
+		}else {
+			self.status = true;
+			show();
+			showNumber();
+		}
 	}
 }
 
+//=================================================
+//  消息通知部分
 function Notice() {
 	this.element = document.querySelector("#Notice");
 	this.inputInfo = "请输入年龄，如 19960201...";
@@ -456,7 +476,7 @@ function Notice() {
 		container.appendChild(input);
 	};
 
-	var sendNotice = function (text) {
+	this.sendNotice = function (text) {
 		container.innerHTML = text;
 		show();
 	};
@@ -467,7 +487,7 @@ function Notice() {
         status = 'login';
 		show();
 	};
-	var setBirthday = function () {
+	this.setBirthday = function () {
 		container.innerHTML = "请输入您的生日w~：";
 		createInput();
 		var input = document.querySelector("#NoticeInput");
@@ -479,14 +499,23 @@ function Notice() {
 	};
 	this.onSubmitClick = function () {
         if (status == 'login' || status == undefined){
-		    sendNotice("Coming soon");
+		    this.sendNotice("Coming soon");
         }else if (status == 'birthday') {
-            
+			var input = document.querySelector("#NoticeInput");
+			if (timer.setBirthday(input.value)){
+				this.sendNotice("Submit success!");
+				setTimeout(function () {
+					timer.onTimerClick();
+				},1000);
+			}else {
+                inputText.errorReport(input);
+            }
         }
 	};
 	this.onLoginClick = function () {
 		login();
 	};
+
 	var show = function () {
 		animation.pullDownNotice(self.element);
 		openFlag.push(notice);

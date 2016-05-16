@@ -644,6 +644,7 @@ p {
     margin-left:10px;
     width: 50%;
 }
-#NoticeInput{
-    color:lightgray;
+#NoticeInput {
+    position: relative;
+    color: lightgray;
 }
