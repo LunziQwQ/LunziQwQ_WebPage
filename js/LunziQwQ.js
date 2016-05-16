@@ -39,85 +39,31 @@ addEventListener("keyup", function(event) { //键盘Enter监听，捕获后触�
         }
 	}
 });
+
 //=================================================
 //  页面动画类
 function Animation() {
-	this.scaleShow = function(element) {
-		element.className += ' showTheBlock';
-		setTimeout(function() {
-			element.style.transform = 'scale(1)';
-			element.className = '';
-		}, 290);
-	};
-	this.scaleHide = function(element) {
-		element.className += ' hideTheBlock';
-		setTimeout(function() {
-			element.style.transform = 'scale(0)';
-			element.className = '';
-		}, 290);
-	};
-	this.opacityShow = function(element) {
-		element.className += ' showMore';
-		setTimeout(function() {
-			element.style.opacity = '1';
-			element.className = '';
-		}, 290);
-	};
-	this.opacityHide = function(element) {
-		element.className += ' hideMore';
-		setTimeout(function() {
-			element.style.opacity = '0';
-			element.className = '';
-		}, 290);
-	};
-	this.pullDownMenu = function(element) {
-		element.className += ' pullDownMenu';
-		setTimeout(function() {
-			element.style.top = '0';
-			element.className = '';
-		}, 190)
-	};
-	this.pullUpMenu = function(element) {
-		element.className += ' pullUpMenu';
-		setTimeout(function() {
-			element.style.top = '-100px';
-			element.className = '';
-		}, 190)
-	};
-	this.pullDownPage = function(element) {
-		element.className += ' pullDownPage';
-		setTimeout(function() {
-			element.style.height = '100%';
-			element.className = '';
-		}, 290);
-	};
-	this.pushUpPage = function(element) {
-		element.className += ' pushUpPage';
-		setTimeout(function() {
-			element.style.height = '0';
-			element.className = '';
-		}, 290);
-	};
-	this.inputError = function (element) {
-		element.className += ' inputError';
-		setTimeout(function () {
-			element.className = '';
-		}, 500);
-	};
-	this.pullDownNotice = function (element) {
-		element.className += ' pullDownNotice';
-		setTimeout(function () {
-			element.style.top = '0';
-			element.className = '';
-		}, 290);
-	};
-	this.pushUpNotice = function (element) {
-		element.className += ' pushUpNotice';
-		setTimeout(function () {
-			element.style.top = '-30%';
-			element.className = '';
-		},290);
-	};
+
+    var list = {
+        "scaleShow":        {className: " showTheBlock",    styleName: "transform", value: "scale(1)",  time: 290},
+        "scaleHide":        {className: " hideTheBlock",    styleName: "transform", value: "scale(0)",  time: 290},
+        "opacityShow":      {className: ' showMore',        styleName: "opacity",   value: "1",         time: 290},
+        "opacityHide":      {className: ' hideMore',        styleName: "opacity",   value: "0",         time: 290},
+        "pullDownMenu":     {className: ' pullDownMenu',    styleName: "top",       value: "0",         time: 190},
+        "pushUpMenu":       {className: ' pushUpMenu',      styleName: "top",       value: "-100px",    time: 190},
+        "pullDownPage":     {className: ' pullDownPage',    styleName: "height",    value: "100%",      time: 290},
+        "pushUpPage":       {className: ' pushUpPage',      styleName: "height",    value: "0",         time: 290},
+        "pullDownNotice":   {className: ' pullDownNotice',  styleName: "top",       value: "0",         time: 290},
+        "pushUpNotice":     {className: ' pushUpNotice',    styleName: "top",       value: "-30%",      time: 290},
+        "inputError":       {className: ' inputError',      styleName: "position",  value: "relative",  time: 500}
+    };
+    this.doAnimation = function (mode, element) {
+        element.className += list[mode].className;
+        setTimeout(function () {
+            element.style[list[mode].styleName] = list[mode].value;
+            element.className = '';
+        }, list[mode].time);
+    };
 }
 //=================================================
 //  输入框类
@@ -131,7 +77,7 @@ function Input() {
 		element.value = '';
 	};
 	this.errorReport = function(element) {
-		animation.inputError(element);
+        animation.doAnimation("inputError", element);
 	};
 	this.onFocus = function(element) {
 		this.nowFocus = element;
@@ -182,12 +128,12 @@ function MyInfo() {
 				return;
 			}
 		}
-		animation.scaleShow(myInfo.element);
+        animation.doAnimation("scaleShow", myInfo.element);
 		openFlag.push(myInfo); //传递当前已达开的页面，点击其他区域时会捕获
 		event.cancelBubble = true; //阻止事件冒泡
 	};
 	this.close = function() {
-		animation.scaleHide(myInfo.element)
+        animation.doAnimation("scaleHide", myInfo.element);
 	}
 }
 //=================================================
@@ -201,20 +147,20 @@ function RightMenu() {
 
 	this.showMore = function(element) {
 		var moreNote = element.querySelector('p');
-		animation.opacityShow(moreNote);
+        animation.doAnimation("opacityShow", moreNote);
 	};
 	this.hideMore = function(element) {
 		var moreNote = element.querySelector('p');
-		animation.opacityHide(moreNote);
-	};
+        animation.doAnimation("opacityHide", moreNote);
+    };
 	this.switchMode = function() {
 		if (nowPart) {
-			animation.scaleHide(rightMenu.element);
-			setTimeout("animation.scaleShow(todoList.element)", 300);
+            animation.doAnimation("scaleHide", rightMenu.element);
+			setTimeout("animation.doAnimation('scaleShow',todoList.element)", 300);
 			nowPart = false; //传递当前模块为 TodoList
 		} else {
-			animation.scaleHide(todoList.element);
-			setTimeout("animation.scaleShow(rightMenu.element)", 300);
+            animation.doAnimation("scaleHide", todoList.element);
+			setTimeout("animation.doAnimation('scaleShow',rightMenu.element)", 300);
 			nowPart = true; //传递当前模块为 四方菜单
 		}
 	}
@@ -225,7 +171,7 @@ function TodoList() {
 	this.element = document.querySelector("#TodoListArea");
 	this.inputInfo = "   请在这里输入您要添加的事项…";
 
-	var editMenu = document.querySelector("#TDL_Btn_Area");
+	var menuEditBtns = document.querySelector("#TDL_Btn_Area");
 	var load = function() {
         return JSON.parse(storage.TDL || '[]');
     };
@@ -253,7 +199,7 @@ function TodoList() {
         }
     };
     this.close = function() {
-        animation.pullUpMenu(editMenu)
+        animation.doAnimation("pushUpMenu", menuEditBtns);
     };
     this.show = function() {
         //输入检查并存储
@@ -271,7 +217,7 @@ function TodoList() {
 				return;
 			}
 		}
-		animation.pullDownMenu(editMenu);
+        animation.doAnimation("pullDownMenu", menuEditBtns);
 		openFlag.push(todoList);
 		event.cancelBubble = true; //阻止事件冒泡
 	};
@@ -335,13 +281,13 @@ function Search() {
 				return;
 			}
 		}
-		animation.scaleShow(this.element);
+        animation.doAnimation("scaleShow", this.element);
 		openFlag.push(search);
 		event.cancelBubble = true; //阻止事件冒泡
 	};
-	this.close = function() {
-		animation.scaleHide(this.element)
-	}
+    this.close = function () {
+        animation.doAnimation("scaleHide", this.element);
+    };
 }
 //=================================================
 //  Timer Part
@@ -361,9 +307,9 @@ function Timer() {
 
 	this.setBirthday = function(string) {
 		if (checkBirthdayInput(string)) {
-            birthDate.setFullYear(string.slice(0, 4));
-            birthDate.setMonth(string.slice(4, 6) - 1);
-            birthDate.setDate(string.slice(6, 8));
+            birthDate.setFullYear(parseInt(string.slice(0, 4)));
+            birthDate.setMonth(parseInt(string.slice(4, 6)) - 1);
+            birthDate.setDate(parseInt(string.slice(6, 8)));
             birthDate.setHours(0);
             birthDate.setMinutes(0);
             birthDate.setSeconds(0);
@@ -392,38 +338,31 @@ function Timer() {
 	};
 	var show = function() {
 		fullScreen(document.documentElement);
-		setTimeout(function(){
-			animation.pullDownPage(self.element);
-			openFlag.push(timer);
-		},200)
+        setTimeout(function () {
+            animation.doAnimation("pullDownPage", self.element);
+            openFlag.push(timer);
+        }, 200);
 		
 	};
     var fullScreen = function(element) {
-        if (element.requestFullscreen) {
-            element.requestFullscreen();
-        } else if (element.mozRequestFullScreen) {
-            element.mozRequestFullScreen();
-        } else if (element.webkitRequestFullscreen) {
-            element.webkitRequestFullscreen();
-        } else if (element.msRequestFullscreen) {
-            element.msRequestFullscreen();
-        }
+        var fs = element.requestFullscreen
+            || element.mozRequestFullScreen
+            || element.webkitRequestFullscreen
+            || element.msRequestFullscreen;
+        fs.call(element);
     };
     var exitFullScreen = function() {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen();
-        } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-        }
+        var efs = document.exitFullscreen
+            || document.mozCancelFullScreen
+            || document.webkitExitFullscreen;
+        efs.call(document);
     };
     this.getNumberValue = function() {
         var nowDate = new Date();
         numberValue = (nowDate.getTime() - birthDate.getTime()) / 31536000000;
     };
 	this.close = function() {
-		animation.pushUpPage(this.element);
+        animation.doAnimation("pushUpPage", this.element);
 		setTimeout(function(){
 			exitFullScreen(document.documentElement);
 		},300);
@@ -517,10 +456,10 @@ function Notice() {
 	};
 
 	var show = function () {
-		animation.pullDownNotice(self.element);
+        animation.doAnimation("pullDownNotice", self.element);
 		openFlag.push(notice);
 	};
 	this.close = function () {
-		animation.pushUpNotice(this.element);
+        animation.doAnimation("pushUpNotice", this.element);
 	};
 }

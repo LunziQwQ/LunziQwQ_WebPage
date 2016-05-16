@@ -203,7 +203,7 @@ p {
     animation: DownMenu 0.2s;
 }
 
-.pullUpMenu {
+.pushUpMenu {
     animation: UpMenu 0.2s;
 }
 
