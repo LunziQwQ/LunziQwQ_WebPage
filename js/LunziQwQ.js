@@ -15,6 +15,7 @@ var storage = window.localStorage;
 var openFlag = [];
 myInfo.showAge();
 todoList.show();
+rightMenu.load();
 inputText.changeInfo(inputText.TodoList, 'show');
 inputText.changeInfo(inputText.Search, 'show');
 //=================================================
@@ -39,22 +40,20 @@ addEventListener("keyup", function(event) { //键盘Enter监听，捕获后触�
         }
 	}
 });
-
 //=================================================
 //  页面动画类
 function Animation() {
-
     var list = {
-        "scaleShow":        {className: " showTheBlock",    styleName: "transform", value: "scale(1)",  time: 290},
-        "scaleHide":        {className: " hideTheBlock",    styleName: "transform", value: "scale(0)",  time: 290},
-        "opacityShow":      {className: ' showMore',        styleName: "opacity",   value: "1",         time: 290},
-        "opacityHide":      {className: ' hideMore',        styleName: "opacity",   value: "0",         time: 290},
-        "pullDownMenu":     {className: ' pullDownMenu',    styleName: "top",       value: "0",         time: 190},
-        "pushUpMenu":       {className: ' pushUpMenu',      styleName: "top",       value: "-100px",    time: 190},
-        "pullDownPage":     {className: ' pullDownPage',    styleName: "height",    value: "100%",      time: 290},
-        "pushUpPage":       {className: ' pushUpPage',      styleName: "height",    value: "0",         time: 290},
-        "pullDownNotice":   {className: ' pullDownNotice',  styleName: "top",       value: "0",         time: 290},
-        "pushUpNotice":     {className: ' pushUpNotice',    styleName: "top",       value: "-30%",      time: 290},
+        "scaleShow":        {className: " showTheBlock",    styleName: "transform", value: "scale(1)",  time: 270},
+        "scaleHide":        {className: " hideTheBlock",    styleName: "transform", value: "scale(0)",  time: 270},
+        "opacityShow":      {className: ' showMore',        styleName: "opacity",   value: "1",         time: 270},
+        "opacityHide":      {className: ' hideMore',        styleName: "opacity",   value: "0",         time: 270},
+        "pullDownMenu":     {className: ' pullDownMenu',    styleName: "top",       value: "0",         time: 170},
+        "pushUpMenu":       {className: ' pushUpMenu',      styleName: "top",       value: "-100px",    time: 170},
+        "pullDownPage":     {className: ' pullDownPage',    styleName: "height",    value: "100%",      time: 270},
+        "pushUpPage":       {className: ' pushUpPage',      styleName: "height",    value: "0",         time: 270},
+        "pullDownNotice":   {className: ' pullDownNotice',  styleName: "top",       value: "0",         time: 270},
+        "pushUpNotice":     {className: ' pushUpNotice',    styleName: "top",       value: "-30%",      time: 270},
         "inputError":       {className: ' inputError',      styleName: "position",  value: "relative",  time: 500}
     };
     this.doAnimation = function (mode, element) {
@@ -143,7 +142,19 @@ function MyInfo() {
 //  Menu Class（包含右上角switch按钮）
 function RightMenu() {
 	this.element = document.querySelector("#MenuArea");
+    var self = this;
 	var nowPart = true;
+
+    var save = function () {
+        storage.RightMenu = nowPart?"true":"false";
+    };
+    this.load = function () {
+        nowPart = (storage.RightMenu == "true");
+        if (!nowPart) {
+            this.element.style.transform = "scale(0)";
+            todoList.element.style.transform = "scale(1)";
+        }
+    };
 
 	this.showMore = function(element) {
 		var moreNote = element.querySelector('p');
@@ -163,6 +174,7 @@ function RightMenu() {
 			setTimeout("animation.doAnimation('scaleShow',rightMenu.element)", 300);
 			nowPart = true; //传递当前模块为 四方菜单
 		}
+        save();
 	}
 }
 //=======================
@@ -172,6 +184,7 @@ function TodoList() {
 	this.inputInfo = "   请在这里输入您要添加的事项…";
 
 	var menuEditBtns = document.querySelector("#TDL_Btn_Area");
+
 	var load = function() {
         return JSON.parse(storage.TDL || '[]');
     };
@@ -262,9 +275,8 @@ function Search() {
 			"Taobao": "https://s.taobao.com/search?q="
 		};
 		var select = document.querySelector("#SEOSelect");
-		var select_value = select.options[select.selectedIndex].value;
 		if (search_text.length == 0 || search_text == search.inputInfo) return false;
-		return SEOList[select_value] + search_text;
+		return SEOList[select.options[select.selectedIndex].value] + search_text;
 	};
 
 	this.doSearch = function() {
@@ -295,38 +307,17 @@ function Timer() {
 	this.element = document.querySelector("#Timer");
 	this.status = true;
 
-	var birthday = {
-		year: 1997,
-		month: 9,
-		day: 22,
-		set: false
-	};
 	var numberValue = 0;
 	var birthDate = new Date();
 	var self = this;
-
-	this.setBirthday = function(string) {
-		if (checkBirthdayInput(string)) {
-            birthDate.setFullYear(parseInt(string.slice(0, 4)));
-            birthDate.setMonth(parseInt(string.slice(4, 6)) - 1);
-            birthDate.setDate(parseInt(string.slice(6, 8)));
-            birthDate.setHours(0);
-            birthDate.setMinutes(0);
-            birthDate.setSeconds(0);
-            birthDate.setMilliseconds(0);
-			birthday.set = true;
-            return true;
-		}else return false;
-	};
-
-	var checkBirthdayInput = function (string) {
-        var patten = /^\d{4}(0[1-9]|1[0-2])(0[1-9]|[1-2]\d|3[0-1])$/;
-        return patten.test(string);
-	};
-
+    var birthday = {
+        year: 1997,
+        month: 9,
+        day: 22,
+        set: false
+    };
 	var showNumber = function() {
 		var numberElement = document.querySelector("#Number");
-
 		var int = setInterval(function() {
 			self.getNumberValue();
 			numberElement.innerHTML = numberValue.toFixed(10);
@@ -342,7 +333,6 @@ function Timer() {
             animation.doAnimation("pullDownPage", self.element);
             openFlag.push(timer);
         }, 200);
-		
 	};
     var fullScreen = function(element) {
         var fs = element.requestFullscreen
@@ -357,6 +347,35 @@ function Timer() {
             || document.webkitExitFullscreen;
         efs.call(document);
     };
+    var checkBirthdayInput = function (string) {
+        var patten = /^\d{4}(0[1-9]|1[0-2])(0[1-9]|[1-2]\d|3[0-1])$/;
+        return patten.test(string);
+    };
+    var save = function (string) {
+        birthday.year = parseInt(string.slice(0, 4));
+        birthday.month = parseInt(string.slice(4, 6));
+        birthday.day = parseInt(string.slice(6, 8));
+        birthday.set = true;
+        storage.Birthday = JSON.stringify(birthday);
+    };
+    var load = function () {
+        birthday = JSON.parse(storage.Birthday || JSON.stringify(birthday));
+        birthDate.setFullYear(birthday.year);
+        birthDate.setMonth(birthday.month - 1);
+        birthDate.setDate(birthday.day);
+        birthDate.setHours(0);
+        birthDate.setMinutes(0);
+        birthDate.setSeconds(0);
+        birthDate.setMilliseconds(0);
+    };
+
+    this.setBirthday = function(string) {
+        if (checkBirthdayInput(string)) {
+            save(string);
+            load();
+            return true;
+        }else return false;
+    };
     this.getNumberValue = function() {
         var nowDate = new Date();
         numberValue = (nowDate.getTime() - birthDate.getTime()) / 31536000000;
@@ -369,6 +388,7 @@ function Timer() {
 		self.status = false;
 	};
 	this.onTimerClick = function() {
+        load();
 		if (!birthday.set) {
 			notice.sendNotice("请先设置您的生日~");
 			setTimeout(function () {
