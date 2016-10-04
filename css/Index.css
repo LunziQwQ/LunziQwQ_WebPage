@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, "Times New Roman", Times, serif;
+    background: url("../img/QQ图片20160412204030.png");
+    overflow: hidden;
+}
+
+#lz-navbar {
+    background: #59b1db;
+}
+#lz-navbar a {
+    color: #e8e6e6;
+    font-size: 25px;
+}
+#lz-navbar a:hover,
+#lz-navbar a:focus{
+    color: white;
+}
+#lz-header {
+    margin: 70px 0;
+    text-align: center;;
+}
+#lz-footer {
+    margin-top: 30px;
+    padding: 40px 0;
+    color: #999;
+    text-align: center;
+    border-top: 1px solid #e5e5e5;
+}
+#lz-footer p:last-child {
+    margin-bottom: 0;
+}
+.lz-block {
+    padding:20px;
+    background: white;
+    border: 1px solid #e6e6e6;
+    box-shadow: 2px 2px 5px grey;
+    border-radius: 4px;
+}
