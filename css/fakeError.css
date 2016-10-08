@@ -1,0 +1,15 @@
+h1{
+    color: #333;
+    font-size: 1.6em;
+    font-weight: normal;
+    line-height: 1.25em;
+    margin-bottom: 16px;
+}
+
+.container {
+    margin: auto;
+    min-height: 500px;
+    min-width: 350px;
+    height: 30%;
+    width: 60%;
+}
