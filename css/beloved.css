@@ -1,0 +1,18 @@
+body{
+    background: url("../img/QQ图片20160412204030.png");
+}
+
+#Timer{
+    text-align: center;
+    font-family: Arial;
+    font-size:30px;
+}
+
+#Timer > span {
+    font-family: Consolas;
+    font-size:40px;
+}
+
+#Timer p{
+    font-size:45px;
+}
