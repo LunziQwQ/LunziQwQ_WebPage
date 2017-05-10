@@ -2,23 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <title>喵~这里是轮子~</title>
-    <!-- JQuery & Bootstrap 核心CSS、JS -->
-    <script src="lib/jquery_3.1.1.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width,minimum-scale=0.5,maximum-scale=1.5,user-scalable=no">
+
+    <title>Beloved Yuyu~</title>
+
+    <script src="js/jquery_3.1.1.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/bootstrap_3.3.7.js"></script>
+
     <link rel="stylesheet" href="css/beloved.css">
+    <link rel="stylesheet" href="css/beloved-min.css">
+
+    <script src="js/highlight.pack.js"></script>
+    <link rel="stylesheet" href="css/solarized-light.css">
+    <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
 
-<div id="Timer">
-    <p>Yuyu, I have fall in love with you for</p>
-    <span></span> year
-    <span></span> month
-    <span></span> day
-    <span></span> hr
-    <span></span> min
-    <span></span> sec
+<div id="timer" onclick="timer.onTimerClick(event)">
+    <p>Yuyu</p>
+    <p>I have fallen in love with you for</p>
+    <span id="modeCtrl">
+        <span class="num"></span> year
+        <span class="num"></span> month
+    </span>
+    <span class="num"></span> day
+    <span class="num"></span> hr
+    <span class="num"></span> min
+    <span class="num"></span> sec
 </div>
+
+<div id="gallery">
+    <img src="img/hyouka1.jpg" alt="hyoukai">
+</div>
+
+<div id="text">
+     <!--* The feels like i'm in heaven when i sit near your with a bouquet of flowers then you smile to me.-->
+    <pre><code class="cpp"></code></pre>
+</div>
+
+<div id="copyright">
+    Copyright &copy; 2017 <a href="http://lunzi.pw">lunzi.pw</a>
+</div>
+
+<ourstory>
+<firstmeet>#define now "February-2014"
+
+/**
+* Our story is beginning
+* We were in different schools but the same city.
+* First time i meet u was in the games center.
+*/
+
+int main(){
+    Boy i;
+    i.name = "Lunzi";
+    //I was playing game alone.
+
+    Girl u;
+    u.name = "Yuyu";
+    //You just watched me playing.
+
+    //We talked about Jubeat, just a little.
+    //Seems nothing happened.
+
+    //But i began to notice you.
+    i.notice(u);
+
+    return FirstMeet;
+}
+</firstmeet>
+
+</ourstory>
 
 <script src="js/beloved.js"></script>
 </body>

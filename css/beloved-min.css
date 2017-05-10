@@ -1,0 +1,30 @@
+
+@media (max-width: 567px) and (orientation: portrait) {
+
+    #timer{
+        font-size:20px;
+    }
+
+    .num{
+        font-size:25px;
+    }
+
+    #timer p{
+        font-size:30px;
+    }
+
+    #gallery{
+        float: none;
+        width: 90%;
+        height:auto;
+        margin-bottom:10px;
+    }
+
+    #text {
+        width: 90%;
+        margin-top: 10px;
+
+    }
+
+
+}

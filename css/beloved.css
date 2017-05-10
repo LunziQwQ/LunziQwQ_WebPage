@@ -1,18 +1,70 @@
 body{
     background: url("../img/QQ图片20160412204030.png");
+    -webkit-overflow-scrolling: touch;
 }
 
-#Timer{
-    text-align: center;
-    font-family: Arial;
+@font-face {
+    font-family: Digit;
+    src: url("../ttf/digital-7_mono.ttf") format("truetype");
+}
+
+ourstory{
+    display: none;
+}
+
+#timer{
+    text-align: right;
+    font-family:"Times New Roman" ;
     font-size:30px;
+    padding:0 10px;
+    margin:20px 5% 0 0;
 }
 
-#Timer > span {
-    font-family: Consolas;
+.num {
+    font-family: Digit;
     font-size:40px;
 }
 
-#Timer p{
+#timer p{
     font-size:45px;
+    margin: -10px 0 -5px 0;
+}
+
+#gallery {
+    float: right;
+    margin: 40px 5% 50PX 5%;
+    padding: 5px;
+    width: 45%;
+    max-width: 600px;
+    height: auto;
+    border: solid 1px #ccc;
+    border-radius:4px;
+    background-color: #f5f5f5;
+}
+
+
+#gallery img {
+    width: 100%;
+    height:auto;
+}
+
+#text {
+    margin: 40px 0 50PX 5%;
+    padding:5px;
+    width: 35%;
+    border: solid 1px #ccc;
+    border-radius:4px;
+    background-color: #f5f5f5;
+}
+
+#text pre{
+    background: #fdf6e3;
+    margin:0;
+}
+
+#copyright {
+    position: relative;
+    bottom: 5px;
+    text-align: center;
+    clear: both;
 }
