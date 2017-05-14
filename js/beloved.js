@@ -8,24 +8,25 @@ var timer =new Timer();
 var ourStory = new OurStory();
 
 ourStory.showText(0);
-timer.updateTimer(500);
+timer.updateTimer();
 
 function Timer() {
     var self = this;
+    var delay = 100;
     var mode = 1;
-    var startDay = new Date(2014,5,1);
+    var startDay = new Date(2014,5,1,16,25);
     var base = new Date(2000,1,1);
 
-    this.updateTimer = function (delay) {
+    this.updateTimer = function () {
         var self = this;
         setTimeout(function () {
             var elapse = getElapseTime();
             $('.num').each(function (i, x) {
                 $(x).text(elapse[i]);           //JQ对象集使用each遍历后会转为dom对象
             });
-            if ( mode ===2)
+            if (mode === 2)
                 $($('.num')[2]).text(elapse[6]);
-            self.updateTimer(delay);
+            self.updateTimer();
         },delay);
     };
 

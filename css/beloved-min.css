@@ -1,8 +1,9 @@
 
 @media (max-width: 567px) and (orientation: portrait) {
 
-    #timer{
-        font-size:20px;
+    #timer {
+        font-size: 20px;
+        margin:20px 5% 0 0;
     }
 
     .num{
@@ -17,13 +18,13 @@
         float: none;
         width: 90%;
         height:auto;
-        margin-bottom:10px;
+        margin: 40px 5% 10PX 5%;
+
     }
 
     #text {
         width: 90%;
-        margin-top: 10px;
-
+        margin: 10px 5% 50PX 5%;
     }
 
 

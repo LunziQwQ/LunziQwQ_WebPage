@@ -12,12 +12,27 @@ ourstory{
     display: none;
 }
 
+#bgm_control {
+    float: left;
+    margin: 0 20px;
+    font-size:20px;
+}
+
+#bgm_control img{
+    width:50px;
+    height:auto;
+}
+
+#bgm_control span{
+
+}
+
 #timer{
     text-align: right;
     font-family:"Times New Roman" ;
     font-size:30px;
     padding:0 10px;
-    margin:20px 5% 0 0;
+    margin:20px 8% 0 0;
 }
 
 .num {
@@ -27,12 +42,12 @@ ourstory{
 
 #timer p{
     font-size:45px;
-    margin: -10px 0 -5px 0;
+    line-height: .9em;
 }
 
 #gallery {
     float: right;
-    margin: 40px 5% 50PX 5%;
+    margin: 40px 8% 50PX 5%;
     padding: 5px;
     width: 45%;
     max-width: 600px;
@@ -49,7 +64,7 @@ ourstory{
 }
 
 #text {
-    margin: 40px 0 50PX 5%;
+    margin: 40px 0 50PX 8%;
     padding:5px;
     width: 35%;
     border: solid 1px #ccc;
