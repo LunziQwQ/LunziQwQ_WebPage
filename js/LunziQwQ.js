@@ -21,9 +21,9 @@ inputText.changeInfo(inputText.Search, 'show');     //显示Search输入框的�
 //=================================================
 //  全局事件监听
 document.onclick = function() {     //监听 （背景/Timer/立绘） 上的点击事件
-    if (event.target == document.querySelector("#background")
-        || event.target == timer.element
-        || event.target == document.querySelector("#MyPng")
+    if (event.target === document.querySelector("#background")
+        || event.target === timer.element
+        || event.target === document.querySelector("#MyPng")
     ){
         while (openFlag.length > 0) {
             openFlag.pop().close(); //遍历openFlag数组并调用对应控件的关闭方法
@@ -31,14 +31,14 @@ document.onclick = function() {     //监听 （背景/Timer/立绘） 上的点
     }
 };
 addEventListener("keyup", function(event) { //监听键盘的Enter键松开事件
-	if (event.keyCode == 13) {      //当焦点在输入框并按下Enter时，调用对应的方法
-		if (inputText.nowFocus == inputText.TodoList) {
+	if (event.keyCode === 13) {      //当焦点在输入框并按下Enter时，调用对应的方法
+		if (inputText.nowFocus === inputText.TodoList) {
 			todoList.doAdd();
 		}
-		if (inputText.nowFocus == inputText.Search) {
+		if (inputText.nowFocus === inputText.Search) {
 			search.doSearch();
 		}
-        if (inputText.nowFocus == inputText.notice) {
+        if (inputText.nowFocus === inputText.notice) {
             notice.onSubmitClick();
         }
 	}
@@ -94,7 +94,7 @@ function Input() {
 		element.style.color = 'black';
 	};
 	this.onBlur = function(element) {       //失去焦点时显示提示内容，字体颜色变灰
-		if (element.value == '') {
+		if (element.value === '') {
 			this.changeInfo(element, 'show');
 		}
 		element.style.color = 'lightgray';
@@ -105,7 +105,7 @@ function Input() {
      * @param {String} mode 显示/清空（'show'/'hide'）
      */
 	this.changeInfo = function(element, mode) { //
-		if (mode == 'show') {
+		if (mode === 'show') {
 			switch (element) {
 				case this.TodoList:
 					element.value = todoList.inputInfo;
@@ -139,7 +139,7 @@ function MyInfo() {
     //显示我的信息控件
 	this.show = function(event) {
 		for	(var i = 0;i < openFlag.length;i++){    //当控件已经显示时阻止再次点击重复动画
-			if(openFlag[i] == myInfo){
+			if(openFlag[i] === myInfo){
 				event.cancelBubble = true;          //阻止事件冒泡
 				return;
 			}
@@ -167,7 +167,7 @@ function RightMenu() {
     };
     //读取缓存中记录的显示状态并改变页面
     this.load = function () {
-        nowPart = (storage.RightMenu == "true");
+        nowPart = (storage.RightMenu === "true");
         if (!nowPart) {
             this.element.style.transform = "scale(0)";
             todoList.element.style.transform = "scale(1)";
@@ -234,7 +234,7 @@ function TodoList() {
     var add = function() {
         var list = load();
         var addText = inputText.TodoList.value;
-        if (addText.length == 0 || addText.length >= 35 || !addText || addText == todoList.inputInfo) {
+        if (addText.length === 0 || addText.length >= 35 || !addText || addText === todoList.inputInfo) {
             inputText.errorReport(inputText.TodoList);      //若输入为空或长度大于35字符，反馈输入错误
         } else {
             list[list.length] = {       //条目为JSON结构对象集合
@@ -260,7 +260,7 @@ function TodoList() {
 	this.onEditClick = function(event) {
         //阻止控件已显示后再次点击出现重复动画
 		for	(var i = 0;i < openFlag.length;i++){
-			if(openFlag[i] == todoList){
+			if(openFlag[i] === todoList){
 				event.cancelBubble = true;                      //阻止事件冒泡
 				return;
 			}
@@ -320,7 +320,7 @@ function Search() {
 			"Taobao": "https://s.taobao.com/search?q="
 		};
 		var select = document.querySelector("#SEOSelect");
-		if (search_text.length == 0 || search_text == search.inputInfo) return false;
+		if (search_text.length === 0 || search_text === search.inputInfo) return false;
 		return SEOList[select.options[select.selectedIndex].value] + search_text;
 	};
     //打开新窗口发起createGet方法获得的Get请求
@@ -335,7 +335,7 @@ function Search() {
 	this.onSearchClick = function() {
         //防止控件已显示时再次点击重复动画
 		for	(var i = 0;i < openFlag.length;i++){
-			if(openFlag[i] == search){
+			if(openFlag[i] === search){
 				event.cancelBubble = true;  //阻止事件冒泡
 				return;
 			}
@@ -528,9 +528,9 @@ function Notice() {
 	};
     //点击submit按钮时执行对应方法
 	this.onSubmitClick = function () {
-        if (status == 'login' || status == undefined){  //根据当前通知类型执行对应submit
+        if (status === 'login' || status === undefined){  //根据当前通知类型执行对应submit
 		    this.sendNotice("Coming soon");
-        }else if (status == 'birthday') {
+        }else if (status === 'birthday') {
 			var input = document.querySelector("#NoticeInput");
 			if (timer.setBirthday(input.value)){
 				this.sendNotice("Submit success!");

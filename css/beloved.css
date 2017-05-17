@@ -15,16 +15,12 @@ ourstory{
 #bgm_control {
     float: left;
     margin: 0 20px;
-    font-size:20px;
+    font-size:inherit;
 }
 
 #bgm_control img{
     width:50px;
     height:auto;
-}
-
-#bgm_control span{
-
 }
 
 #timer{

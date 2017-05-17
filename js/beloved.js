@@ -6,6 +6,9 @@
 
 var timer =new Timer();
 var ourStory = new OurStory();
+var bgm = new BGM();
+
+$("#bgMusic")[0].volume = 0.2;
 
 ourStory.showText(0);
 timer.updateTimer();
@@ -93,3 +96,18 @@ function OurStory() {
     };
 }
 
+function BGM() {
+    var isPlaying = true;
+
+    this.onBGMClick = function () {
+        if (isPlaying){
+            $("#bgMusic")[0].pause();
+            $("#bgm_control > img").attr('src', "img/heart251.png");
+        } else {
+            $("#bgMusic")[0].play();
+            $("#bgm_control > img").attr('src',"img/heart249.png");
+        }
+        isPlaying = !isPlaying;
+    };
+
+}
